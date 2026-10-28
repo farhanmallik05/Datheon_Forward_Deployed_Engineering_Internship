@@ -1,0 +1,176 @@
+{
+  "inventory": [
+    {
+      "sku": "SKU-H100-80G",
+      "product_name": "NVIDIA H100 80GB SXM5 Node",
+      "category": "Hardware",
+      "quantity_on_hand": 14,
+      "unit_cost_usd": 32000.0,
+      "warehouse_id": "WH-US-EAST",
+      "reorder_level": 5
+    },
+    {
+      "sku": "SKU-L40S-48G",
+      "product_name": "NVIDIA L40S 48GB PCIe Server",
+      "category": "Hardware",
+      "quantity_on_hand": 38,
+      "unit_cost_usd": 11500.0,
+      "warehouse_id": "WH-US-WEST",
+      "reorder_level": 10
+    },
+    {
+      "sku": "SKU-NET-SWITCH-400G",
+      "product_name": "Arista 400G Enterprise Spine Switch",
+      "category": "Networking",
+      "quantity_on_hand": 8,
+      "unit_cost_usd": 18200.0,
+      "warehouse_id": "WH-US-EAST",
+      "reorder_level": 4
+    },
+    {
+      "sku": "SKU-NVME-STORAGE-30TB",
+      "product_name": "PureStorage FlashBlade NVMe Tray",
+      "category": "Storage",
+      "quantity_on_hand": 6,
+      "unit_cost_usd": 45000.0,
+      "warehouse_id": "WH-EU-CENTRAL",
+      "reorder_level": 2
+    }
+  ],
+  "leads": [
+    {
+      "lead_id": "LEAD-2026-101",
+      "company_name": "Apex Global Financial",
+      "contact_email": "cto@apexglobal.com",
+      "estimated_arr_usd": 350000.0,
+      "pipeline_stage": "NEGOTIATION",
+      "assigned_rep": "Sarah Jenkins",
+      "notes": "Requires on-prem VPC deployment with FIPS-140-3 validation."
+    },
+    {
+      "lead_id": "LEAD-2026-102",
+      "company_name": "BioHealth Genomics",
+      "contact_email": "vpe@biohealth.org",
+      "estimated_arr_usd": 180000.0,
+      "pipeline_stage": "QUALIFIED",
+      "assigned_rep": "David Chen",
+      "notes": "Evaluating vector ETL latency on clinical patient records."
+    },
+    {
+      "lead_id": "LEAD-2026-103",
+      "company_name": "Vanguard Logistics",
+      "contact_email": "ops@vanguardlogistics.com",
+      "estimated_arr_usd": 520000.0,
+      "pipeline_stage": "PROPOSAL_DELIVERED",
+      "assigned_rep": "Sarah Jenkins",
+      "notes": "Multi-agent ERP tool orchestration POC required."
+    }
+  ],
+  "tickets": [
+    {
+      "ticket_id": "TCK-8801",
+      "account_id": "ACC-5001",
+      "subject": "Vector DB query timeout on Qdrant batch upsert",
+      "priority": "HIGH",
+      "status": "OPEN",
+      "assigned_engineer": "Alex Mercer",
+      "created_at": "2026-10-25T14:22:00Z"
+    },
+    {
+      "ticket_id": "TCK-8802",
+      "account_id": "ACC-5002",
+      "subject": "RBAC clearance denial for Finance audit team",
+      "priority": "CRITICAL",
+      "status": "IN_PROGRESS",
+      "assigned_engineer": "Maria Santos",
+      "created_at": "2026-10-26T09:10:00Z"
+    },
+    {
+      "ticket_id": "TCK-8803",
+      "account_id": "ACC-5003",
+      "subject": "Request for custom CSV parser with ISO-8601 timestamps",
+      "priority": "MEDIUM",
+      "status": "RESOLVED",
+      "assigned_engineer": "Alex Mercer",
+      "created_at": "2026-10-24T11:45:00Z"
+    }
+  ],
+  "purchase_orders": [
+    {
+      "po_number": "PO-88210",
+      "vendor": "NVIDIA Cloud Compute",
+      "amount_usd": 145000.0,
+      "status": "APPROVED",
+      "requires_hitl": true,
+      "approval_token": null
+    },
+    {
+      "po_number": "PO-88220",
+      "vendor": "CrowdStrike SecOps",
+      "amount_usd": 42000.0,
+      "status": "PENDING_APPROVAL",
+      "requires_hitl": true,
+      "approval_token": null
+    },
+    {
+      "po_number": "PO-88299",
+      "vendor": "Supermicro GPU Enclosures",
+      "amount_usd": 285000.0,
+      "status": "PENDING_APPROVAL",
+      "requires_hitl": true,
+      "approval_token": null
+    },
+    {
+      "po_number": "PO-88238",
+      "vendor": "NVIDIA Cloud Compute",
+      "amount_usd": 145000.0,
+      "status": "PENDING_APPROVAL",
+      "requires_hitl": true,
+      "approval_token": null,
+      "created_at": "2026-10-28T13:39:03.331994+00:00"
+    },
+    {
+      "po_number": "PO-88239",
+      "vendor": "NVIDIA Cloud Compute",
+      "amount_usd": 145000.0,
+      "status": "PENDING_APPROVAL",
+      "requires_hitl": true,
+      "approval_token": null,
+      "created_at": "2026-10-28T13:40:29.417903+00:00"
+    }
+  ],
+  "audit_log": [
+    {
+      "timestamp": "2026-10-28T13:39:03.332642+00:00",
+      "action": "CREATE_PO",
+      "entity_type": "purchase_orders",
+      "entity_id": "PO-88238",
+      "user_id": "USR-FIN-9901",
+      "details": {
+        "po_number": "PO-88238",
+        "vendor": "NVIDIA Cloud Compute",
+        "amount_usd": 145000.0,
+        "status": "PENDING_APPROVAL",
+        "requires_hitl": true,
+        "approval_token": null,
+        "created_at": "2026-10-28T13:39:03.331994+00:00"
+      }
+    },
+    {
+      "timestamp": "2026-10-28T13:40:29.418604+00:00",
+      "action": "CREATE_PO",
+      "entity_type": "purchase_orders",
+      "entity_id": "PO-88239",
+      "user_id": "USR-FIN-9901",
+      "details": {
+        "po_number": "PO-88239",
+        "vendor": "NVIDIA Cloud Compute",
+        "amount_usd": 145000.0,
+        "status": "PENDING_APPROVAL",
+        "requires_hitl": true,
+        "approval_token": null,
+        "created_at": "2026-10-28T13:40:29.417903+00:00"
+      }
+    }
+  ]
+}
