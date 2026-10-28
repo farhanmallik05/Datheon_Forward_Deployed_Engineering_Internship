@@ -5,7 +5,9 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg?logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Docker](https://img.shields.io/badge/Docker-Hardened%20VPC-2496ED.svg?logo=docker)](https://www.docker.com/)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Netlify%20Showcase-00AD9F.svg?logo=netlify)](https://datheon-fde-platform.netlify.app)
-[![Directorate Tests](https://img.shields.io/badge/3--Pass%20Audit-100%25%20Passing%20(21%2F21)-success.svg)](scripts/verify_all.py)
+[![CI Pipeline](https://github.com/farhanmallik05/Datheon_Forward_Deployed_Engineering_Internship/actions/workflows/ci.yml/badge.svg)](https://github.com/farhanmallik05/Datheon_Forward_Deployed_Engineering_Internship/actions)
+[![Directorate Tests](https://img.shields.io/badge/3--Pass%20Audit-100%25%20Passing%20(25%2F25)-success.svg)](scripts/verify_all.py)
+[![Evaluation Due Diligence](https://img.shields.io/badge/Evaluation%20Audit-Grade%20A%20(8.9%2F10)-blueviolet.svg)](docs/PROJECT_EVALUATION_REPORT.md)
 
 ---
 

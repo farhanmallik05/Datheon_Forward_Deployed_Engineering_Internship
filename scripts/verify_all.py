@@ -31,9 +31,17 @@ def run_pass_1():
 
 def run_pass_2():
     print("\n" + "=" * 75)
-    print("  PASS 2: RBAC SECURITY BOUNDARIES, CITATION INTEGRITY & LEAKAGE AUDIT")
+    print("  PASS 2: RBAC SECURITY BOUNDARIES, CITATION INTEGRITY & ADVERSARIAL AUDIT")
     print("=" * 75)
-    cmd = [sys.executable, "-m", "pytest", "tests/test_task2_rag_rbac.py", "tests/test_security_leakage.py", "-v"]
+    cmd = [
+        sys.executable,
+        "-m",
+        "pytest",
+        "tests/test_task2_rag_rbac.py",
+        "tests/test_security_leakage.py",
+        "tests/test_adversarial_security.py",
+        "-v",
+    ]
     res = subprocess.run(cmd, cwd=BASE_DIR, capture_output=True, text=True)
     print(res.stdout)
     if res.returncode != 0:

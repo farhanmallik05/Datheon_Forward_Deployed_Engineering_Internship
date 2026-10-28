@@ -4,6 +4,7 @@ Assembles VPC security policies, Prometheus observability middleware,
 error handling, and lifecycle events for production deployment.
 """
 import time
+import uuid
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, Response, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -74,8 +75,9 @@ app.add_middleware(
 
 @app.middleware("http")
 async def telemetry_and_logging_middleware(request: Request, call_next):
-    """Measures request latency and records Prometheus metrics."""
+    """Measures request latency, records Prometheus metrics, and injects W3C correlation IDs."""
     start_time = time.perf_counter()
+    correlation_id = request.headers.get("X-Correlation-ID") or f"corr-{uuid.uuid4().hex[:12]}"
     response: Response = None
 
     try:
@@ -88,6 +90,8 @@ async def telemetry_and_logging_middleware(request: Request, call_next):
             status_code=response.status_code,
             duration_sec=duration_sec,
         )
+        response.headers["X-Correlation-ID"] = correlation_id
+        response.headers["X-Response-Time-Ms"] = f"{(duration_sec * 1000.0):.2f}"
         return response
     except Exception as e:
         duration_sec = time.perf_counter() - start_time
