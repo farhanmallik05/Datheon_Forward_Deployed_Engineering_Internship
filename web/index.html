@@ -7,213 +7,294 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #070B14;
-      color: #E2E8F0;
+      font-family: var(--font-sans);
+      background-color: #F8FAFC;
+      color: #0F172A;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     code, pre, .mono {
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .glow-cyan {
-      box-shadow: 0 0 25px -5px rgba(0, 229, 255, 0.25);
-    }
-    .glow-blue {
-      box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.25);
-    }
-    .border-glow:focus-within {
-      border-color: #00E5FF;
-      box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
     }
     .custom-scrollbar::-webkit-scrollbar {
       width: 6px;
       height: 6px;
     }
     .custom-scrollbar::-webkit-scrollbar-track {
-      background: #0D1527;
+      background: #F1F5F9;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #1E293B;
-      border-radius: 3px;
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+    .tabular-numbers {
+      font-variant-numeric: tabular-nums;
     }
   </style>
 </head>
-<body class="min-h-screen bg-[#070B14] selection:bg-[#00E5FF] selection:text-black">
+<body class="min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-blue-100 selection:text-blue-900">
 
-  <!-- Top Navigation Bar -->
-  <header class="border-b border-slate-800/80 bg-[#0A0F1D]/80 backdrop-blur-md sticky top-0 z-50">
+  <!-- Top Enterprise App Header -->
+  <header class="border-b border-slate-200/80 bg-white/90 backdrop-blur-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-[#00E5FF] to-blue-600 flex items-center justify-center font-bold text-black text-lg">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white text-base shadow-sm ring-2 ring-blue-500/20">
           D
         </div>
         <div>
-          <span class="font-bold text-lg tracking-tight text-white flex items-center gap-2">
-            Datheon <span class="text-xs uppercase px-2 py-0.5 rounded-full bg-cyan-950/80 text-[#00E5FF] border border-cyan-800/50">FDE Platform</span>
-          </span>
-          <p class="text-[11px] text-slate-400">Enterprise Forward Deployed Engineering System</p>
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-base tracking-tight text-slate-900">Datheon</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200/80">
+              FDE Platform
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-500 font-medium">Forward Deployed Engineering Verification Suite</p>
         </div>
       </div>
 
-      <div class="flex items-center space-x-3 text-xs">
-        <div class="hidden md:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-slate-300">VPC Cluster: <strong class="text-emerald-400 font-medium">HEALTHY (10.180.20.0/24)</strong></span>
+      <div class="flex items-center space-x-3">
+        <!-- VPC Cluster Health Badge -->
+        <div class="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-emerald-50/80 border border-emerald-200 text-xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-slate-600 font-medium">VPC Cluster:</span>
+          <span class="text-emerald-700 font-semibold mono">10.180.20.0/24 (ONLINE)</span>
         </div>
-        <a href="https://github.com/farhanmallik05/Datheon_Forward_Deployed_Engineering_Internship" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black font-semibold transition flex items-center gap-1.5">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
-          GitHub Code
+
+        <!-- GitHub Repository Button -->
+        <a href="https://github.com/farhanmallik05/Datheon_Forward_Deployed_Engineering_Internship" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-medium text-xs shadow-sm transition-all duration-150 flex items-center gap-2 active:scale-95">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+          <span>GitHub Source</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero & Executive Overview Container -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-    <div class="relative overflow-hidden rounded-2xl border border-slate-800 bg-gradient-to-b from-[#0F172A] to-[#0A0F1D] p-6 sm:p-8">
-      <div class="max-w-3xl space-y-3">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-blue-950/80 text-blue-400 border border-blue-800/40">
-          <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+    
+    <!-- Hero Banner Card -->
+    <div class="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-sm">
+      <div class="absolute -right-20 -top-20 w-80 h-80 bg-blue-50 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-indigo-50 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative max-w-3xl space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
           Datheon Batch 01 · Directorate Evaluation Suite
         </div>
-        <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
           Enterprise AI Integration & VPC Microservice
         </h1>
-        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
-          Production proof-of-work showcasing all four assignments: Vector ETL pipeline, Multi-Tenant RBAC RAG with page citations, autonomous ERP/CRM ReAct agent with Human-in-the-Loop gating, and telemetry-hardened VPC containerization.
+        <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+          Production proof-of-work showcasing all four syllabus tasks: multi-format Vector ETL, multi-tenant RBAC RAG with strict citation guardrails, autonomous ERP/CRM ReAct agent with Human-in-the-Loop approval, and telemetry-hardened VPC containerization.
         </p>
       </div>
 
-      <!-- Quick Metrics Bar -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-800/80">
-        <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
-          <div class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">ETL Ingestion Rate</div>
-          <div class="text-xl sm:text-2xl font-bold text-[#00E5FF] mt-1">47.05 <span class="text-xs text-slate-400 font-normal">chunks/s</span></div>
-          <div class="text-[10px] text-emerald-400 mt-0.5">100% Metadata Preservation</div>
+      <!-- High-Impact Key Metrics Bento Grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8 pt-6 border-t border-slate-100">
+        <!-- Metric 1 -->
+        <div class="bg-slate-50/80 p-4 rounded-xl border border-slate-200/80 transition-all hover:border-slate-300">
+          <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">ETL Ingestion Rate</div>
+          <div class="text-2xl font-bold text-slate-900 mt-1.5 tabular-numbers">
+            47.05 <span class="text-xs text-slate-500 font-normal">chunks/s</span>
+          </div>
+          <div class="text-[11px] font-medium text-emerald-600 mt-1 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            100% Lineage Preserved
+          </div>
         </div>
-        <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
-          <div class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">Median RAG Latency</div>
-          <div class="text-xl sm:text-2xl font-bold text-blue-400 mt-1">83.06 <span class="text-xs text-slate-400 font-normal">ms (p50)</span></div>
-          <div class="text-[10px] text-slate-400 mt-0.5">With Cross-Encoder Rerank</div>
+
+        <!-- Metric 2 -->
+        <div class="bg-slate-50/80 p-4 rounded-xl border border-slate-200/80 transition-all hover:border-slate-300">
+          <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Median RAG Latency</div>
+          <div class="text-2xl font-bold text-slate-900 mt-1.5 tabular-numbers">
+            83.06 <span class="text-xs text-slate-500 font-normal">ms (p50)</span>
+          </div>
+          <div class="text-[11px] font-medium text-blue-600 mt-1 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            Cross-Encoder Rerank
+          </div>
         </div>
-        <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
-          <div class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">RBAC Data Leaks</div>
-          <div class="text-xl sm:text-2xl font-bold text-emerald-400 mt-1">0 <span class="text-xs text-slate-400 font-normal">leaks</span></div>
-          <div class="text-[10px] text-emerald-400 mt-0.5">Zero Cross-Tenant Leakage</div>
+
+        <!-- Metric 3 -->
+        <div class="bg-slate-50/80 p-4 rounded-xl border border-slate-200/80 transition-all hover:border-slate-300">
+          <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">RBAC Boundary Leaks</div>
+          <div class="text-2xl font-bold text-emerald-600 mt-1.5 tabular-numbers">
+            0 <span class="text-xs text-slate-500 font-normal">violations</span>
+          </div>
+          <div class="text-[11px] font-medium text-slate-600 mt-1 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            Mathematical Index Filter
+          </div>
         </div>
-        <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
-          <div class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">3-Pass Verification</div>
-          <div class="text-xl sm:text-2xl font-bold text-purple-400 mt-1">21 / 21 <span class="text-xs text-slate-400 font-normal">tests</span></div>
-          <div class="text-[10px] text-purple-400 mt-0.5">100% Pass Rate Audit</div>
+
+        <!-- Metric 4 -->
+        <div class="bg-slate-50/80 p-4 rounded-xl border border-slate-200/80 transition-all hover:border-slate-300">
+          <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">3-Pass Verification</div>
+          <div class="text-2xl font-bold text-slate-900 mt-1.5 tabular-numbers">
+            21 / 21 <span class="text-xs text-slate-500 font-normal">passing</span>
+          </div>
+          <div class="text-[11px] font-medium text-purple-600 mt-1 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+            Directorate Audit Passed
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Main Interactive Tabs -->
-    <div class="space-y-4">
-      <div class="flex border-b border-slate-800 gap-2 overflow-x-auto pb-1 text-sm">
-        <button onclick="switchTab('tab-rag')" id="btn-tab-rag" class="px-4 py-2 font-medium rounded-t-lg bg-slate-800 text-[#00E5FF] border-b-2 border-[#00E5FF] transition">
+    <!-- Segmented Navigation Bar -->
+    <div class="space-y-6">
+      <div class="p-1 bg-slate-200/70 rounded-xl inline-flex flex-wrap gap-1 border border-slate-300/60 shadow-inner">
+        <button onclick="switchTab('tab-rag')" id="btn-tab-rag" class="px-4 py-2 font-semibold text-xs sm:text-sm rounded-lg bg-white text-blue-700 shadow-sm transition-all duration-150">
           Task 2: RBAC RAG Playground
         </button>
-        <button onclick="switchTab('tab-agent')" id="btn-tab-agent" class="px-4 py-2 font-medium rounded-t-lg text-slate-400 hover:text-white transition">
+        <button onclick="switchTab('tab-agent')" id="btn-tab-agent" class="px-4 py-2 font-semibold text-xs sm:text-sm rounded-lg text-slate-600 hover:text-slate-900 transition-all duration-150">
           Task 3: Autonomous Agent & HITL Gate
         </button>
-        <button onclick="switchTab('tab-etl')" id="btn-tab-etl" class="px-4 py-2 font-medium rounded-t-lg text-slate-400 hover:text-white transition">
+        <button onclick="switchTab('tab-etl')" id="btn-tab-etl" class="px-4 py-2 font-semibold text-xs sm:text-sm rounded-lg text-slate-600 hover:text-slate-900 transition-all duration-150">
           Task 1: Vector ETL Data Lineage
         </button>
-        <button onclick="switchTab('tab-vpc')" id="btn-tab-vpc" class="px-4 py-2 font-medium rounded-t-lg text-slate-400 hover:text-white transition">
-          Task 4: VPC Telemetry & Health Probes
+        <button onclick="switchTab('tab-vpc')" id="btn-tab-vpc" class="px-4 py-2 font-semibold text-xs sm:text-sm rounded-lg text-slate-600 hover:text-slate-900 transition-all duration-150">
+          Task 4: VPC Telemetry & Latency
         </button>
       </div>
 
+      <!-- ========================================== -->
       <!-- TAB 1: RBAC RAG Playground -->
+      <!-- ========================================== -->
       <div id="tab-rag" class="space-y-6">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
           <!-- Persona Selector & Controls -->
-          <div class="bg-[#0D1527] border border-slate-800 rounded-xl p-5 space-y-4">
-            <h3 class="font-bold text-white text-base flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
-              Caller Identity & Clearance Profile
-            </h3>
-            <p class="text-xs text-slate-400">
-              Select an enterprise employee persona to test clearance level filtering and tenant isolation boundaries:
-            </p>
+          <div class="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 space-y-5 shadow-sm">
+            <div>
+              <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+                Caller Identity & Clearance Tier
+              </h3>
+              <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                Toggle employee identity to test mathematical clearance filtering and tenant partition guarantees:
+              </p>
+            </div>
 
             <div class="space-y-2 text-xs">
-              <label class="block cursor-pointer p-3 rounded-lg border border-slate-700 bg-slate-900/80 hover:border-cyan-500 transition" onclick="selectPersona('eng')">
-                <input type="radio" name="persona" checked class="text-cyan-500">
-                <strong class="text-white ml-2">Alex Mercer</strong>
-                <span class="block text-slate-400 ml-5 text-[11px]">Dept: Engineering | Clearance: <strong class="text-blue-400">L2_RESTRICTED</strong></span>
+              <!-- Eng L2 -->
+              <label class="block cursor-pointer p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 hover:border-blue-400 transition-all" onclick="selectPersona('eng')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <input type="radio" name="persona" checked class="text-blue-600 focus:ring-blue-500">
+                    <strong class="text-slate-900 font-semibold text-sm">Alex Mercer</strong>
+                  </div>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-100 text-blue-800 border border-blue-200">L2_RESTRICTED</span>
+                </div>
+                <span class="block text-slate-500 ml-6 text-xs mt-0.5">Dept: Engineering · Platform Systems</span>
               </label>
 
-              <label class="block cursor-pointer p-3 rounded-lg border border-slate-700 bg-slate-900/80 hover:border-cyan-500 transition" onclick="selectPersona('fin')">
-                <input type="radio" name="persona" class="text-cyan-500">
-                <strong class="text-white ml-2">Sarah Jenkins</strong>
-                <span class="block text-slate-400 ml-5 text-[11px]">Dept: Finance | Clearance: <strong class="text-purple-400">L3_CONFIDENTIAL</strong></span>
+              <!-- Finance L3 -->
+              <label class="block cursor-pointer p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 hover:border-blue-400 transition-all" onclick="selectPersona('fin')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <input type="radio" name="persona" class="text-blue-600 focus:ring-blue-500">
+                    <strong class="text-slate-900 font-semibold text-sm">Sarah Jenkins</strong>
+                  </div>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-purple-100 text-purple-800 border border-purple-200">L3_CONFIDENTIAL</span>
+                </div>
+                <span class="block text-slate-500 ml-6 text-xs mt-0.5">Dept: Finance · Strategic Auditing</span>
               </label>
 
-              <label class="block cursor-pointer p-3 rounded-lg border border-slate-700 bg-slate-900/80 hover:border-cyan-500 transition" onclick="selectPersona('hr')">
-                <input type="radio" name="persona" class="text-cyan-500">
-                <strong class="text-white ml-2">David Chen</strong>
-                <span class="block text-slate-400 ml-5 text-[11px]">Dept: Human Resources | Clearance: <strong class="text-purple-400">L3_CONFIDENTIAL</strong></span>
+              <!-- HR L3 -->
+              <label class="block cursor-pointer p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 hover:border-blue-400 transition-all" onclick="selectPersona('hr')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <input type="radio" name="persona" class="text-blue-600 focus:ring-blue-500">
+                    <strong class="text-slate-900 font-semibold text-sm">David Chen</strong>
+                  </div>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-purple-100 text-purple-800 border border-purple-200">L3_CONFIDENTIAL</span>
+                </div>
+                <span class="block text-slate-500 ml-6 text-xs mt-0.5">Dept: Human Resources · Comp Committee</span>
               </label>
 
-              <label class="block cursor-pointer p-3 rounded-lg border border-slate-700 bg-slate-900/80 hover:border-cyan-500 transition" onclick="selectPersona('pub')">
-                <input type="radio" name="persona" class="text-cyan-500">
-                <strong class="text-white ml-2">Junior Intern</strong>
-                <span class="block text-slate-400 ml-5 text-[11px]">Dept: Cross-Functional | Clearance: <strong class="text-emerald-400">L1_PUBLIC</strong></span>
+              <!-- Public L1 Intern -->
+              <label class="block cursor-pointer p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 hover:border-blue-400 transition-all" onclick="selectPersona('pub')">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <input type="radio" name="persona" class="text-blue-600 focus:ring-blue-500">
+                    <strong class="text-slate-900 font-semibold text-sm">Junior Intern</strong>
+                  </div>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">L1_PUBLIC</span>
+                </div>
+                <span class="block text-slate-500 ml-6 text-xs mt-0.5">Dept: Cross-Functional · Base Clearance</span>
               </label>
             </div>
 
             <!-- Pre-loaded Query Chips -->
-            <div class="pt-3 border-t border-slate-800 space-y-2">
-              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Sample Test Queries</span>
-              <div class="flex flex-wrap gap-1.5 text-xs">
-                <button onclick="setQuery('What was Datheon Q3 consolidated revenue and cloud infrastructure spend?')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300">Finance: Q3 Revenue</button>
-                <button onclick="setQuery('What is the token bucket rate limit for Tier L1 and Tier L2 users?')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300">Eng: Rate Limits</button>
-                <button onclick="setQuery('What is the executive bonus multiplier for Band E1 and Band E2?')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300">HR: Executive Bonus</button>
-                <button onclick="setQuery('What is the duration of trade secret confidentiality under mutual NDA?')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300">Legal: NDA Term</button>
+            <div class="pt-4 border-t border-slate-100 space-y-2.5">
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Interactive Test Queries</span>
+              <div class="flex flex-col gap-1.5 text-xs">
+                <button onclick="setQuery('What was Datheon Q3 consolidated revenue and cloud infrastructure spend?')" class="text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-blue-50 hover:text-blue-700 text-slate-700 border border-slate-200/80 transition font-medium">
+                  📊 Finance: Q3 Revenue & Margins ($48.6M)
+                </button>
+                <button onclick="setQuery('What is the token bucket rate limit for Tier L1 and Tier L2 users?')" class="text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-blue-50 hover:text-blue-700 text-slate-700 border border-slate-200/80 transition font-medium">
+                  ⚡ Eng: Token Bucket Rate Limiting
+                </button>
+                <button onclick="setQuery('What is the executive bonus multiplier for Band E1 and Band E2?')" class="text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-blue-50 hover:text-blue-700 text-slate-700 border border-slate-200/80 transition font-medium">
+                  🔒 HR: Executive Band E1/E2 Bonus Multiplier
+                </button>
+                <button onclick="setQuery('What is the duration of trade secret confidentiality under mutual NDA?')" class="text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-blue-50 hover:text-blue-700 text-slate-700 border border-slate-200/80 transition font-medium">
+                  ⚖️ Legal: Trade Secret Perpetuity Clause
+                </button>
               </div>
             </div>
           </div>
 
           <!-- Query Input & Response Viewer -->
-          <div class="lg:col-span-2 space-y-4">
-            <div class="bg-[#0D1527] border border-slate-800 rounded-xl p-5 space-y-3">
-              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Enterprise Natural Language Query</label>
-              <div class="flex gap-2">
-                <input id="rag-query-input" type="text" value="What was Datheon Q3 consolidated revenue and cloud infrastructure spend?" class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
-                <button onclick="executeRAG()" class="px-4 py-2 bg-[#00E5FF] hover:bg-cyan-400 text-black font-semibold rounded-lg text-sm transition">
-                  Run Query
+          <div class="lg:col-span-2 space-y-5">
+            <div class="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 space-y-3.5 shadow-sm">
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Natural Language Enterprise Query</label>
+              <div class="flex gap-2.5">
+                <input id="rag-query-input" type="text" value="What was Datheon Q3 consolidated revenue and cloud infrastructure spend?" class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition">
+                <button onclick="executeRAG()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-sm shadow-sm transition active:scale-95 flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                  Search
                 </button>
               </div>
             </div>
 
             <!-- Answer Output Window -->
-            <div id="rag-output-card" class="bg-[#0D1527] border border-slate-800 rounded-xl p-5 space-y-4 min-h-[220px]">
-              <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                <div class="flex items-center gap-2">
-                  <span class="text-xs uppercase font-bold text-slate-400">RAG Response Output</span>
-                  <span id="rag-grounded-badge" class="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800">100% Grounded</span>
+            <div id="rag-output-card" class="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 space-y-5 shadow-sm min-h-[240px]">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
+                <div class="flex items-center gap-2.5">
+                  <span class="text-xs uppercase font-bold text-slate-500 tracking-wider">Verified Grounded Response</span>
+                  <span id="rag-grounded-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">100% Grounded</span>
                 </div>
-                <span id="rag-latency-text" class="text-xs mono text-slate-400">Retrieval Latency: 12.11 ms</span>
+                <span id="rag-latency-text" class="text-xs mono font-medium text-slate-500">Retrieval Latency: 12.11 ms</span>
               </div>
 
-              <div id="rag-answer-body" class="text-sm leading-relaxed text-slate-200">
-                During the third fiscal quarter of 2026, Datheon achieved total consolidated revenue of $48.6M across enterprise AI software subscriptions and professional forward deployment services. Operating margin reached 24.8%, exceeding street guidance by 180 basis points. Cloud hosting expenditures on AWS and GCP totaled $11.2M. <span class="inline-block px-1.5 py-0.5 bg-blue-900/60 text-blue-300 rounded text-xs mono border border-blue-700">[Source: Q3_Financial_Audit_Report.pdf, Page 1]</span>
+              <!-- Answer Body -->
+              <div id="rag-answer-body" class="text-sm leading-relaxed text-slate-700">
+                During the third fiscal quarter of 2026, Datheon achieved total consolidated revenue of $48.6M across enterprise AI software subscriptions and professional forward deployment services. Operating margin reached 24.8%, exceeding street guidance by 180 basis points. Cloud hosting expenditures on AWS and GCP totaled $11.2M. <span class="inline-block px-2 py-0.5 bg-blue-50 text-blue-700 rounded text-xs mono font-medium border border-blue-200">[Source: Q3_Financial_Audit_Report.pdf, Page 1]</span>
               </div>
 
               <!-- Citation Lineage Footnote -->
-              <div id="rag-citations-container" class="pt-3 border-t border-slate-800/80 space-y-2">
-                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Verified Document Lineage & Citations</span>
-                <div class="p-3 bg-slate-900/70 rounded-lg border border-slate-800 text-xs space-y-1">
+              <div id="rag-citations-container" class="pt-4 border-t border-slate-100 space-y-2.5">
+                <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Verifiable Source Citation Lineage</span>
+                <div class="p-3.5 bg-slate-50/80 rounded-xl border border-slate-200 text-xs space-y-1.5">
                   <div class="flex items-center justify-between">
-                    <strong class="text-cyan-400 mono">Q3_Financial_Audit_Report.pdf</strong>
-                    <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 text-[10px] border border-purple-800">Page 1 · Clearance: L3_CONFIDENTIAL</span>
+                    <strong class="text-blue-700 font-semibold mono">Q3_Financial_Audit_Report.pdf</strong>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-purple-100 text-purple-800 border border-purple-200">${entry.location} · Clearance: L3_CONFIDENTIAL</span>
                   </div>
-                  <p class="text-slate-400 italic">"During the third fiscal quarter of 2026, Datheon Enterprise Solutions achieved total consolidated revenue of $48.6M... Cloud hosting and infrastructure expenditures totaled $11.2M..."</p>
+                  <p class="text-slate-600 italic">"During the third fiscal quarter of 2026, Datheon Enterprise Solutions achieved total consolidated revenue of $48.6M... Cloud hosting and infrastructure expenditures totaled $11.2M..."</p>
                 </div>
               </div>
             </div>
@@ -221,65 +302,86 @@
         </div>
       </div>
 
+      <!-- ========================================== -->
       <!-- TAB 2: Autonomous Agent & HITL Gate -->
+      <!-- ========================================== -->
       <div id="tab-agent" class="hidden space-y-6">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div class="bg-[#0D1527] border border-slate-800 rounded-xl p-5 space-y-4">
-            <h3 class="font-bold text-white text-base flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
-              Autonomous Operations Target
-            </h3>
-            <p class="text-xs text-slate-400">
-              The Field Agent deconstructs goals into <strong>Thought &rarr; Action &rarr; Observation</strong> cycles. High-value transactions trigger the Human-In-The-Loop gate.
-            </p>
+          <div class="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 space-y-5 shadow-sm">
+            <div>
+              <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>
+                Autonomous Operation Dispatcher
+              </h3>
+              <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                The Field Agent deconstructs goals into <strong>Thought &rarr; Action &rarr; Observation</strong> loops. High-risk write operations ($ &ge; 50,000) trigger the cryptographic Human-in-the-Loop gate.
+              </p>
+            </div>
 
-            <div class="space-y-2">
-              <button onclick="runAgentTask('hitl')" class="w-full text-left p-3 rounded-lg border border-purple-800/50 bg-purple-950/20 hover:border-purple-500 transition text-xs">
-                <strong class="text-purple-300 block mb-0.5">High-Value PO ($145,000)</strong>
-                <span class="text-slate-400 block">Check SKU-H100-80G stock and order $145k from NVIDIA. (Triggers HITL Pause)</span>
+            <div class="space-y-2.5">
+              <button onclick="runAgentTask('hitl')" class="w-full text-left p-3.5 rounded-xl border border-amber-300 bg-amber-50/60 hover:bg-amber-50 transition text-xs shadow-sm">
+                <div class="flex items-center justify-between mb-1">
+                  <strong class="text-amber-900 font-semibold text-sm">High-Value PO ($145,000)</strong>
+                  <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-300">HITL GATE</span>
+                </div>
+                <span class="text-slate-600 block">Check SKU-H100-80G stock and purchase $145k from NVIDIA. Halts execution for cryptographic approval.</span>
               </button>
 
-              <button onclick="runAgentTask('lead')" class="w-full text-left p-3 rounded-lg border border-slate-700 bg-slate-900/80 hover:border-cyan-500 transition text-xs">
-                <strong class="text-white block mb-0.5">Advance CRM Lead Stage</strong>
-                <span class="text-slate-400 block">Lookup LEAD-2026-101 and update pipeline stage to QUALIFIED.</span>
+              <button onclick="runAgentTask('lead')" class="w-full text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition text-xs">
+                <strong class="text-slate-900 font-semibold text-sm block mb-1">Advance CRM Lead Stage</strong>
+                <span class="text-slate-600 block">Lookup LEAD-2026-101 and update pipeline status to QUALIFIED.</span>
               </button>
 
-              <button onclick="runAgentTask('ticket')" class="w-full text-left p-3 rounded-lg border border-slate-700 bg-slate-900/80 hover:border-cyan-500 transition text-xs">
-                <strong class="text-white block mb-0.5">ITSM Incident Ticket</strong>
-                <span class="text-slate-400 block">Create HIGH severity incident ticket for account ACC-5001.</span>
+              <button onclick="runAgentTask('ticket')" class="w-full text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition text-xs">
+                <strong class="text-slate-900 font-semibold text-sm block mb-1">Open ITSM Incident Ticket</strong>
+                <span class="text-slate-600 block">Create HIGH severity incident ticket in ServiceNow for account ACC-5001.</span>
               </button>
             </div>
           </div>
 
           <!-- ReAct Execution Trace Output -->
-          <div class="lg:col-span-2 space-y-4">
-            <div class="bg-[#0D1527] border border-slate-800 rounded-xl p-5 space-y-4">
-              <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                <span class="text-xs uppercase font-bold text-slate-400">Agent Reasoning Loop (ReAct Trace)</span>
-                <span id="agent-status-pill" class="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-800">HITL_PAUSED</span>
+          <div class="lg:col-span-2 space-y-5">
+            <div class="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 space-y-5 shadow-sm">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs uppercase font-bold text-slate-500 tracking-wider">ReAct Operational Execution Trace</span>
+                </div>
+                <span id="agent-status-pill" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-300">HITL_PAUSED</span>
               </div>
 
-              <div id="agent-trace-steps" class="space-y-3 mono text-xs">
+              <div id="agent-trace-steps" class="space-y-3.5 mono text-xs">
                 <!-- Step 1 -->
-                <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-800 space-y-1">
-                  <div class="text-cyan-400 font-bold">[STEP 1] THOUGHT:</div>
-                  <div class="text-slate-300">Query enterprise ERP inventory to check available stock and warehouse status for SKU-H100-80G.</div>
-                  <div class="text-blue-400 mt-2 font-bold">ACTION: inventory_lookup({"sku": "SKU-H100-80G"})</div>
-                  <div class="text-emerald-400 mt-1">OBSERVATION: {"status": "SUCCESS", "quantity_on_hand": 14, "warehouse_id": "WH-US-EAST"}</div>
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                  <div class="text-blue-700 font-bold">[STEP 1] THOUGHT:</div>
+                  <div class="text-slate-700">Query enterprise ERP inventory to check available stock and warehouse status for SKU-H100-80G.</div>
+                  <div class="text-slate-900 font-semibold mt-2">ACTION: inventory_lookup({"sku": "SKU-H100-80G"})</div>
+                  <div class="text-emerald-700 font-medium mt-1">OBSERVATION: {"status": "SUCCESS", "quantity_on_hand": 14, "warehouse_id": "WH-US-EAST"}</div>
                 </div>
 
                 <!-- Step 2 (HITL Pause) -->
-                <div id="agent-step-2" class="p-3 bg-amber-950/30 rounded-lg border border-amber-800/60 space-y-2">
-                  <div class="text-amber-400 font-bold">[STEP 2] THOUGHT:</div>
-                  <div class="text-slate-300">Stock is 14. Initiate capital purchase order of $145,000.00 with vendor 'NVIDIA Cloud Compute'.</div>
-                  <div class="text-purple-400 font-bold">ACTION: create_purchase_order({"vendor": "NVIDIA", "amount_usd": 145000.0})</div>
-                  <div class="p-2 bg-amber-900/40 rounded border border-amber-700/50 text-amber-200">
-                    <strong>⚠️ HITL SECURITY GATE ACTIVATED:</strong> Operation halted. Capital purchase order exceeds $50,000 threshold.
-                    <div class="mt-1 text-[11px] text-slate-300">Action ID: <code class="text-amber-400">HITL-ACT-8849F2</code> | Token: <code class="text-cyan-400">0d4f9e17b84a92c8...</code></div>
+                <div id="agent-step-2" class="p-4 bg-amber-50/70 rounded-xl border border-amber-200 space-y-3">
+                  <div class="text-amber-900 font-bold">[STEP 2] THOUGHT:</div>
+                  <div class="text-slate-700">Stock is 14. Initiate capital purchase order of $145,000.00 with vendor 'NVIDIA Cloud Compute'.</div>
+                  <div class="text-purple-800 font-semibold">ACTION: create_purchase_order({"vendor": "NVIDIA", "amount_usd": 145000.0})</div>
+                  <div class="p-3 bg-amber-100/80 rounded-lg border border-amber-300 text-amber-950">
+                    <strong class="font-bold flex items-center gap-1.5 text-amber-900">
+                      <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                      HUMAN-IN-THE-LOOP SECURITY INTERCEPTION:
+                    </strong>
+                    <p class="text-xs text-amber-900 mt-1">
+                      Operation halted by enterprise policy. Capital write action exceeds the $50,000 threshold.
+                    </p>
+                    <div class="mt-2 text-[11px] text-slate-700">
+                      Action ID: <code class="font-bold text-slate-900">HITL-ACT-8849F2</code> | HMAC Token: <code class="text-blue-700">0d4f9e17b84a92c8...</code>
+                    </div>
                   </div>
-                  <div class="pt-2 flex gap-2">
-                    <button onclick="approveHITL(true)" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-black font-bold rounded text-xs transition">Authorize Transaction (Cryptographic Sign)</button>
-                    <button onclick="approveHITL(false)" class="px-3 py-1.5 bg-rose-900 hover:bg-rose-800 text-white font-medium rounded text-xs transition">Reject Transaction</button>
+                  <div class="pt-1 flex gap-2.5">
+                    <button onclick="approveHITL(true)" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg text-xs shadow-sm transition active:scale-95">
+                      Authorize Purchase Order (HMAC Sign)
+                    </button>
+                    <button onclick="approveHITL(false)" class="px-4 py-2 bg-rose-100 hover:bg-rose-200 text-rose-800 font-semibold rounded-lg text-xs border border-rose-200 transition active:scale-95">
+                      Reject Transaction
+                    </button>
                   </div>
                 </div>
               </div>
@@ -288,77 +390,81 @@
         </div>
       </div>
 
+      <!-- ========================================== -->
       <!-- TAB 3: Vector ETL Pipeline Data Lineage -->
+      <!-- ========================================== -->
       <div id="tab-etl" class="hidden space-y-6">
-        <div class="bg-[#0D1527] border border-slate-800 rounded-xl p-5 space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 space-y-5 shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-4 gap-3">
             <div>
-              <h3 class="font-bold text-white text-base">Client Legacy Ingestion Archive & Vector Catalog</h3>
-              <p class="text-xs text-slate-400">Multi-format corporate documents indexed into cosine vector storage with 100% metadata preservation.</p>
+              <h3 class="font-bold text-slate-900 text-base">Client Legacy Ingestion Catalog & Vector Lineage</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Multi-format corporate documents indexed into cosine vector storage with 100% metadata preservation.</p>
             </div>
-            <span class="text-xs mono text-cyan-400 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-1 rounded-lg">21 Semantic Chunks Indexed</span>
+            <span class="text-xs mono font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1 rounded-full self-start sm:self-auto">
+              21 Semantic Chunks Indexed
+            </span>
           </div>
 
           <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="text-slate-400 border-b border-slate-800 uppercase tracking-wider text-[10px]">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead class="bg-slate-50 text-slate-600 border-b border-slate-200 uppercase tracking-wider text-[10px] font-bold">
                 <tr>
-                  <th class="py-2.5 px-3">Document Title</th>
-                  <th class="py-2.5 px-3">Format</th>
-                  <th class="py-2.5 px-3">Department</th>
-                  <th class="py-2.5 px-3">Clearance Tier</th>
-                  <th class="py-2.5 px-3">Chunk Distribution</th>
-                  <th class="py-2.5 px-3">Key Extracted Attributes</th>
+                  <th class="py-3 px-4">Document Title</th>
+                  <th class="py-3 px-3">Format</th>
+                  <th class="py-3 px-3">Department</th>
+                  <th class="py-3 px-3">Clearance Tier</th>
+                  <th class="py-3 px-3">Chunk Distribution</th>
+                  <th class="py-3 px-4">Key Extracted Attributes</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-slate-800/60 text-slate-300">
-                <tr class="hover:bg-slate-900/40">
-                  <td class="py-2.5 px-3 font-semibold text-white">Q3 Financial Audit & Compliance Report</td>
-                  <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 text-[10px]">PDF</span></td>
-                  <td class="py-2.5 px-3">Finance</td>
-                  <td class="py-2.5 px-3"><span class="text-purple-400 font-medium">L3_CONFIDENTIAL</span></td>
-                  <td class="py-2.5 px-3 mono">3 Pages (3 Chunks)</td>
-                  <td class="py-2.5 px-3 text-slate-400">ASC 606 revenue, $48.6M margin, SOX 404</td>
+              <tbody class="divide-y divide-slate-100 text-slate-700">
+                <tr class="hover:bg-slate-50/60 transition">
+                  <td class="py-3 px-4 font-semibold text-slate-900">Q3 Financial Audit & Compliance Report</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-rose-100 text-rose-800 text-[10px]">PDF</span></td>
+                  <td class="py-3 px-3 font-medium">Finance</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-purple-100 text-purple-800 text-[10px]">L3_CONFIDENTIAL</span></td>
+                  <td class="py-3 px-3 mono text-slate-600">3 Pages (3 Chunks)</td>
+                  <td class="py-3 px-4 text-slate-500">ASC 606 revenue, $48.6M margin, SOX 404 audit</td>
                 </tr>
-                <tr class="hover:bg-slate-900/40">
-                  <td class="py-2.5 px-3 font-semibold text-white">VPC Network Architecture Specification v2</td>
-                  <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 text-[10px]">Markdown</span></td>
-                  <td class="py-2.5 px-3">Engineering</td>
-                  <td class="py-2.5 px-3"><span class="text-blue-400 font-medium">L2_RESTRICTED</span></td>
-                  <td class="py-2.5 px-3 mono">4 Sections (4 Chunks)</td>
-                  <td class="py-2.5 px-3 text-slate-400">10.180.0.0/16, Transit Gateway, mTLS</td>
+                <tr class="hover:bg-slate-50/60 transition">
+                  <td class="py-3 px-4 font-semibold text-slate-900">VPC Network Architecture Specification v2</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-blue-100 text-blue-800 text-[10px]">Markdown</span></td>
+                  <td class="py-3 px-3 font-medium">Engineering</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-indigo-100 text-indigo-800 text-[10px]">L2_RESTRICTED</span></td>
+                  <td class="py-3 px-3 mono text-slate-600">4 Sections (4 Chunks)</td>
+                  <td class="py-3 px-4 text-slate-500">10.180.0.0/16, Transit Gateway, mTLS v1.3</td>
                 </tr>
-                <tr class="hover:bg-slate-900/40">
-                  <td class="py-2.5 px-3 font-semibold text-white">Vendor Invoices & AP Journal 2026</td>
-                  <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 text-[10px]">CSV</span></td>
-                  <td class="py-2.5 px-3">Finance</td>
-                  <td class="py-2.5 px-3"><span class="text-blue-400 font-medium">L2_RESTRICTED</span></td>
-                  <td class="py-2.5 px-3 mono">6 Records (6 Chunks)</td>
-                  <td class="py-2.5 px-3 text-slate-400">NVIDIA, Snowflake, CrowdStrike PO lines</td>
+                <tr class="hover:bg-slate-50/60 transition">
+                  <td class="py-3 px-4 font-semibold text-slate-900">Vendor Invoices & AP Journal 2026</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-emerald-100 text-emerald-800 text-[10px]">CSV</span></td>
+                  <td class="py-3 px-3 font-medium">Finance</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-indigo-100 text-indigo-800 text-[10px]">L2_RESTRICTED</span></td>
+                  <td class="py-3 px-3 mono text-slate-600">6 Records (6 Chunks)</td>
+                  <td class="py-3 px-4 text-slate-500">NVIDIA, Snowflake, CrowdStrike PO line items</td>
                 </tr>
-                <tr class="hover:bg-slate-900/40">
-                  <td class="py-2.5 px-3 font-semibold text-white">Corporate Policy 804: Executive Compensation</td>
-                  <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 text-[10px]">PDF</span></td>
-                  <td class="py-2.5 px-3">HR</td>
-                  <td class="py-2.5 px-3"><span class="text-purple-400 font-medium">L3_CONFIDENTIAL</span></td>
-                  <td class="py-2.5 px-3 mono">2 Pages (2 Chunks)</td>
-                  <td class="py-2.5 px-3 text-slate-400">Band E1/E2 bonus multipliers, double trigger</td>
+                <tr class="hover:bg-slate-50/60 transition">
+                  <td class="py-3 px-4 font-semibold text-slate-900">Corporate Policy 804: Executive Compensation</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-rose-100 text-rose-800 text-[10px]">PDF</span></td>
+                  <td class="py-3 px-3 font-medium">HR</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-purple-100 text-purple-800 text-[10px]">L3_CONFIDENTIAL</span></td>
+                  <td class="py-3 px-3 mono text-slate-600">2 Pages (2 Chunks)</td>
+                  <td class="py-3 px-4 text-slate-500">Band E1/E2 bonus multipliers, double trigger acceleration</td>
                 </tr>
-                <tr class="hover:bg-slate-900/40">
-                  <td class="py-2.5 px-3 font-semibold text-white">Enterprise API Rate Limiting Policy</td>
-                  <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 text-[10px]">Markdown</span></td>
-                  <td class="py-2.5 px-3">Engineering</td>
-                  <td class="py-2.5 px-3"><span class="text-emerald-400 font-medium">L1_PUBLIC</span></td>
-                  <td class="py-2.5 px-3 mono">4 Sections (4 Chunks)</td>
-                  <td class="py-2.5 px-3 text-slate-400">Token bucket, 500 req/min L1 quota</td>
+                <tr class="hover:bg-slate-50/60 transition">
+                  <td class="py-3 px-4 font-semibold text-slate-900">Enterprise API Rate Limiting Policy</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-blue-100 text-blue-800 text-[10px]">Markdown</span></td>
+                  <td class="py-3 px-3 font-medium">Engineering</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-emerald-100 text-emerald-800 text-[10px]">L1_PUBLIC</span></td>
+                  <td class="py-3 px-3 mono text-slate-600">4 Sections (4 Chunks)</td>
+                  <td class="py-3 px-4 text-slate-500">Token bucket, 500 req/min L1 quota, Redis cluster</td>
                 </tr>
-                <tr class="hover:bg-slate-900/40">
-                  <td class="py-2.5 px-3 font-semibold text-white">Master Mutual Non-Disclosure Agreement</td>
-                  <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 text-[10px]">PDF</span></td>
-                  <td class="py-2.5 px-3">Legal</td>
-                  <td class="py-2.5 px-3"><span class="text-blue-400 font-medium">L2_RESTRICTED</span></td>
-                  <td class="py-2.5 px-3 mono">2 Pages (2 Chunks)</td>
-                  <td class="py-2.5 px-3 text-slate-400">Delaware governing law, 5-year trade secret</td>
+                <tr class="hover:bg-slate-50/60 transition">
+                  <td class="py-3 px-4 font-semibold text-slate-900">Master Mutual Non-Disclosure Agreement</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-rose-100 text-rose-800 text-[10px]">PDF</span></td>
+                  <td class="py-3 px-3 font-medium">Legal</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded font-bold bg-indigo-100 text-indigo-800 text-[10px]">L2_RESTRICTED</span></td>
+                  <td class="py-3 px-3 mono text-slate-600">2 Pages (2 Chunks)</td>
+                  <td class="py-3 px-4 text-slate-500">Delaware governing law, 5-year term, trade secret perpetuity</td>
                 </tr>
               </tbody>
             </table>
@@ -366,82 +472,94 @@
         </div>
       </div>
 
-      <!-- TAB 4: VPC Telemetry & Health Probes -->
+      <!-- ========================================== -->
+      <!-- TAB 4: VPC Telemetry & Latency -->
+      <!-- ========================================== -->
       <div id="tab-vpc" class="hidden space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="bg-[#0D1527] border border-slate-800 rounded-xl p-5 space-y-3">
-            <h3 class="font-bold text-white text-base">Prometheus Metric Exporter Preview (/metrics)</h3>
-            <pre class="bg-slate-950 p-4 rounded-lg text-emerald-400 text-xs custom-scrollbar overflow-x-auto h-64 border border-slate-800">
-# HELP datheon_http_requests_total Total incoming HTTP requests
-# TYPE datheon_http_requests_total counter
-datheon_http_requests_total{endpoint="/healthz",method="GET",status_code="200"} 50.0
-datheon_http_requests_total{endpoint="/readyz",method="GET",status_code="200"} 30.0
-datheon_http_requests_total{endpoint="/api/v1/rag/query",method="POST",status_code="200"} 15.0
+          
+          <!-- Prometheus /metrics Explorer -->
+          <div class="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 space-y-4 shadow-sm">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 class="font-bold text-slate-900 text-base">Prometheus Metric Exporter (/metrics)</h3>
+              <span class="text-[11px] mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-medium">HTTP 200</span>
+            </div>
+            <pre class="bg-slate-900 text-slate-100 p-4 rounded-xl text-xs custom-scrollbar overflow-x-auto h-64 border border-slate-800 leading-relaxed">
+<span class="text-slate-400"># HELP datheon_http_requests_total Total incoming HTTP requests</span>
+<span class="text-slate-400"># TYPE datheon_http_requests_total counter</span>
+datheon_http_requests_total{endpoint="/healthz",method="GET",status_code="200"} <span class="text-cyan-400 font-bold">50.0</span>
+datheon_http_requests_total{endpoint="/readyz",method="GET",status_code="200"} <span class="text-cyan-400 font-bold">30.0</span>
+datheon_http_requests_total{endpoint="/api/v1/rag/query",method="POST",status_code="200"} <span class="text-cyan-400 font-bold">15.0</span>
 
-# HELP datheon_http_request_duration_seconds HTTP request latency distribution
-# TYPE datheon_http_request_duration_seconds histogram
-datheon_http_request_duration_seconds_bucket{endpoint="/healthz",le="0.01"} 50.0
-datheon_http_request_duration_seconds_bucket{endpoint="/api/v1/rag/query",le="0.1"} 14.0
+<span class="text-slate-400"># HELP datheon_http_request_duration_seconds HTTP request latency distribution</span>
+<span class="text-slate-400"># TYPE datheon_http_request_duration_seconds histogram</span>
+datheon_http_request_duration_seconds_bucket{endpoint="/healthz",le="0.01"} <span class="text-cyan-400 font-bold">50.0</span>
+datheon_http_request_duration_seconds_bucket{endpoint="/api/v1/rag/query",le="0.1"} <span class="text-cyan-400 font-bold">14.0</span>
 
-# HELP datheon_etl_documents_total Total documents processed
-datheon_etl_documents_total{department="multi",format="multi",status="success"} 6.0
-datheon_etl_chunks_total{clearance="multi",department="multi"} 21.0
+<span class="text-slate-400"># HELP datheon_etl_documents_total Total documents processed</span>
+datheon_etl_documents_total{department="multi",format="multi",status="success"} <span class="text-emerald-400 font-bold">6.0</span>
+datheon_etl_chunks_total{clearance="multi",department="multi"} <span class="text-emerald-400 font-bold">21.0</span>
 
-# HELP datheon_agent_hitl_pending_actions Pending human authorizations
-datheon_agent_hitl_pending_actions 0.0
+<span class="text-slate-400"># HELP datheon_agent_hitl_pending_actions Pending human authorizations</span>
+datheon_agent_hitl_pending_actions <span class="text-amber-400 font-bold">0.0</span>
             </pre>
           </div>
 
-          <div class="bg-[#0D1527] border border-slate-800 rounded-xl p-5 space-y-4">
-            <h3 class="font-bold text-white text-base">Microservice Latency Benchmarks (Empirical)</h3>
-            <div class="space-y-3 text-xs">
+          <!-- Empirical Benchmarks Card -->
+          <div class="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 space-y-4 shadow-sm">
+            <div class="border-b border-slate-100 pb-3">
+              <h3 class="font-bold text-slate-900 text-base">Microservice Latency Benchmarks (Empirical)</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Benchmarked over 50 iterations with synthetic private-VPC latency distribution.</p>
+            </div>
+            
+            <div class="space-y-4 text-xs">
               <div>
-                <div class="flex justify-between text-slate-300 mb-1">
+                <div class="flex justify-between text-slate-700 mb-1.5 font-medium">
                   <span>Liveness Probe (/healthz)</span>
-                  <span class="mono text-cyan-400">1.39 ms (p50)</span>
+                  <span class="mono text-blue-700 font-bold tabular-numbers">1.39 ms (p50)</span>
                 </div>
-                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                  <div class="bg-cyan-400 h-full w-[10%]"></div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                  <div class="bg-blue-600 h-full w-[12%] rounded-full"></div>
                 </div>
               </div>
 
               <div>
-                <div class="flex justify-between text-slate-300 mb-1">
+                <div class="flex justify-between text-slate-700 mb-1.5 font-medium">
                   <span>Readiness Probe (/readyz)</span>
-                  <span class="mono text-cyan-400">1.51 ms (p50)</span>
+                  <span class="mono text-blue-700 font-bold tabular-numbers">1.51 ms (p50)</span>
                 </div>
-                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                  <div class="bg-cyan-400 h-full w-[12%]"></div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                  <div class="bg-blue-600 h-full w-[14%] rounded-full"></div>
                 </div>
               </div>
 
               <div>
-                <div class="flex justify-between text-slate-300 mb-1">
+                <div class="flex justify-between text-slate-700 mb-1.5 font-medium">
                   <span>Mock ERP Inventory Query</span>
-                  <span class="mono text-cyan-400">1.65 ms (p50)</span>
+                  <span class="mono text-blue-700 font-bold tabular-numbers">1.65 ms (p50)</span>
                 </div>
-                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                  <div class="bg-cyan-400 h-full w-[14%]"></div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                  <div class="bg-blue-600 h-full w-[16%] rounded-full"></div>
                 </div>
               </div>
 
               <div>
-                <div class="flex justify-between text-slate-300 mb-1">
+                <div class="flex justify-between text-slate-700 mb-1.5 font-medium">
                   <span>Autonomous Agent ReAct Turn</span>
-                  <span class="mono text-purple-400">5.24 ms (p50)</span>
+                  <span class="mono text-purple-700 font-bold tabular-numbers">5.24 ms (p50)</span>
                 </div>
-                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                  <div class="bg-purple-400 h-full w-[25%]"></div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                  <div class="bg-purple-600 h-full w-[28%] rounded-full"></div>
                 </div>
               </div>
 
               <div>
-                <div class="flex justify-between text-slate-300 mb-1">
+                <div class="flex justify-between text-slate-700 mb-1.5 font-medium">
                   <span>Enterprise RBAC RAG Query</span>
-                  <span class="mono text-blue-400">83.06 ms (p50)</span>
+                  <span class="mono text-indigo-700 font-bold tabular-numbers">83.06 ms (p50)</span>
                 </div>
-                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                  <div class="bg-blue-400 h-full w-[65%]"></div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                  <div class="bg-indigo-600 h-full w-[68%] rounded-full"></div>
                 </div>
               </div>
             </div>
@@ -450,6 +568,24 @@ datheon_agent_hitl_pending_actions 0.0
       </div>
     </div>
   </main>
+
+  <!-- Clean Enterprise Footer -->
+  <footer class="border-t border-slate-200 bg-white mt-12 py-8 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-800">Datheon FDE Platform</span>
+        <span>·</span>
+        <span>Directorate Verification Candidate #2026-FDE-01</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/farhanmallik05/Datheon_Forward_Deployed_Engineering_Internship" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 transition font-medium">GitHub Repository</a>
+        <span>·</span>
+        <span class="text-emerald-700 font-medium">3-Pass Audit 100% Passed</span>
+        <span>·</span>
+        <span>Apache 2.0 License</span>
+      </div>
+    </div>
+  </footer>
 
   <!-- Interactive JavaScript logic -->
   <script>
@@ -463,7 +599,7 @@ datheon_agent_hitl_pending_actions 0.0
         dept: 'finance',
         clearance: 'L3_CONFIDENTIAL',
         latency: '12.11 ms',
-        excerpt: 'Datheon achieved consolidated revenue of $48.6M with operating margin of 24.8%...'
+        excerpt: 'Datheon achieved consolidated revenue of $48.6M with operating margin of 24.8%... Cloud hosting and infrastructure expenditures totaled $11.2M...'
       },
       'rate': {
         answer: 'The Datheon API Gateway employs the Token Bucket algorithm backed by distributed Redis storage. Rate limits are enforced by clearance tier: Tier L1 (Public) allows 500 requests per minute with a 750 burst quota; Tier L2 allows 2,000 requests per minute; Tier L3 allows 5,000 requests per minute.',
@@ -498,13 +634,13 @@ datheon_agent_hitl_pending_actions 0.0
       ['tab-rag', 'tab-agent', 'tab-etl', 'tab-vpc'].forEach(id => {
         document.getElementById(id).classList.add('hidden');
         const btn = document.getElementById('btn-' + id);
-        btn.classList.remove('bg-slate-800', 'text-[#00E5FF]', 'border-b-2', 'border-[#00E5FF]');
-        btn.classList.add('text-slate-400');
+        btn.classList.remove('bg-white', 'text-blue-700', 'shadow-sm');
+        btn.classList.add('text-slate-600');
       });
       document.getElementById(tabId).classList.remove('hidden');
       const activeBtn = document.getElementById('btn-' + tabId);
-      activeBtn.classList.add('bg-slate-800', 'text-[#00E5FF]', 'border-b-2', 'border-[#00E5FF]');
-      activeBtn.classList.remove('text-slate-400');
+      activeBtn.classList.add('bg-white', 'text-blue-700', 'shadow-sm');
+      activeBtn.classList.remove('text-slate-600');
     }
 
     function selectPersona(persona) {
@@ -540,24 +676,30 @@ datheon_agent_hitl_pending_actions 0.0
       latencyText.innerText = `Retrieval Latency: ${entry.latency}`;
 
       if (!allowed) {
-        groundedBadge.className = 'px-2 py-0.5 rounded text-[10px] bg-rose-950 text-rose-400 border border-rose-800';
+        groundedBadge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200';
         groundedBadge.innerText = 'RBAC Access Denied';
-        outBody.innerHTML = `<div class="p-3 bg-rose-950/30 border border-rose-800/60 rounded-lg text-rose-300">
-          <strong>⛔ SECURITY BOUNDARY ENFORCEMENT:</strong> Your current clearance and department tenant scope prohibits reading <code>${entry.dept.toUpperCase()}</code> documents at classification <code>${entry.clearance}</code>. Zero documents leaked to caller.
+        outBody.innerHTML = `<div class="p-4 bg-rose-50 border border-rose-200 rounded-xl text-rose-900 space-y-1">
+          <strong class="font-bold flex items-center gap-1.5 text-rose-800">
+            <svg class="w-4 h-4 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            SECURITY BOUNDARY INTERCEPTION:
+          </strong>
+          <p class="text-xs text-rose-800">
+            Your caller profile lacks clearance for <code>${entry.dept.toUpperCase()}</code> documents classified as <code>${entry.clearance}</code>. Zero candidate vectors leaked.
+          </p>
         </div>`;
-        citationsContainer.innerHTML = '<span class="text-slate-500 italic text-xs">Lineage restricted under RBAC defense-in-depth policy.</span>';
+        citationsContainer.innerHTML = '<span class="text-slate-400 italic text-xs">Document lineage suppressed under zero-trust RBAC policy.</span>';
       } else {
-        groundedBadge.className = 'px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800';
+        groundedBadge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200';
         groundedBadge.innerText = '100% Grounded';
-        outBody.innerHTML = `${entry.answer} <span class="inline-block px-1.5 py-0.5 bg-blue-900/60 text-blue-300 rounded text-xs mono border border-blue-700">[Source: ${entry.source}, ${entry.location}]</span>`;
+        outBody.innerHTML = `${entry.answer} <span class="inline-block px-2 py-0.5 bg-blue-50 text-blue-700 rounded text-xs mono font-medium border border-blue-200">[Source: ${entry.source}, ${entry.location}]</span>`;
         citationsContainer.innerHTML = `
-          <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Verified Document Lineage & Citations</span>
-          <div class="p-3 bg-slate-900/70 rounded-lg border border-slate-800 text-xs space-y-1">
+          <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Verifiable Source Citation Lineage</span>
+          <div class="p-3.5 bg-slate-50/80 rounded-xl border border-slate-200 text-xs space-y-1.5">
             <div class="flex items-center justify-between">
-              <strong class="text-cyan-400 mono">${entry.source}</strong>
-              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 text-[10px] border border-purple-800">${entry.location} · Clearance: ${entry.clearance}</span>
+              <strong class="text-blue-700 font-semibold mono">${entry.source}</strong>
+              <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-purple-100 text-purple-800 border border-purple-200">${entry.location} · Clearance: ${entry.clearance}</span>
             </div>
-            <p class="text-slate-400 italic">"${entry.excerpt}"</p>
+            <p class="text-slate-600 italic">"${entry.excerpt}"</p>
           </div>
         `;
       }
@@ -568,61 +710,73 @@ datheon_agent_hitl_pending_actions 0.0
       const pill = document.getElementById('agent-status-pill');
 
       if (type === 'hitl') {
-        pill.className = 'px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-800';
+        pill.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-300';
         pill.innerText = 'HITL_PAUSED';
         container.innerHTML = `
-          <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-800 space-y-1">
-            <div class="text-cyan-400 font-bold">[STEP 1] THOUGHT:</div>
-            <div class="text-slate-300">Query enterprise ERP inventory to check available stock and warehouse status for SKU-H100-80G.</div>
-            <div class="text-blue-400 mt-2 font-bold">ACTION: inventory_lookup({"sku": "SKU-H100-80G"})</div>
-            <div class="text-emerald-400 mt-1">OBSERVATION: {"status": "SUCCESS", "quantity_on_hand": 14, "warehouse_id": "WH-US-EAST"}</div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+            <div class="text-blue-700 font-bold">[STEP 1] THOUGHT:</div>
+            <div class="text-slate-700">Query enterprise ERP inventory to check available stock and warehouse status for SKU-H100-80G.</div>
+            <div class="text-slate-900 font-semibold mt-2">ACTION: inventory_lookup({"sku": "SKU-H100-80G"})</div>
+            <div class="text-emerald-700 font-medium mt-1">OBSERVATION: {"status": "SUCCESS", "quantity_on_hand": 14, "warehouse_id": "WH-US-EAST"}</div>
           </div>
-          <div id="agent-step-2" class="p-3 bg-amber-950/30 rounded-lg border border-amber-800/60 space-y-2">
-            <div class="text-amber-400 font-bold">[STEP 2] THOUGHT:</div>
-            <div class="text-slate-300">Stock is 14. Initiate capital purchase order of $145,000.00 with vendor 'NVIDIA Cloud Compute'.</div>
-            <div class="text-purple-400 font-bold">ACTION: create_purchase_order({"vendor": "NVIDIA", "amount_usd": 145000.0})</div>
-            <div class="p-2 bg-amber-900/40 rounded border border-amber-700/50 text-amber-200">
-              <strong>⚠️ HITL SECURITY GATE ACTIVATED:</strong> Operation halted. Capital purchase order exceeds $50,000 threshold.
-              <div class="mt-1 text-[11px] text-slate-300">Action ID: <code class="text-amber-400">HITL-ACT-8849F2</code> | Token: <code class="text-cyan-400">0d4f9e17b84a92c8...</code></div>
+          <div id="agent-step-2" class="p-4 bg-amber-50/70 rounded-xl border border-amber-200 space-y-3">
+            <div class="text-amber-900 font-bold">[STEP 2] THOUGHT:</div>
+            <div class="text-slate-700">Stock is 14. Initiate capital purchase order of $145,000.00 with vendor 'NVIDIA Cloud Compute'.</div>
+            <div class="text-purple-800 font-semibold">ACTION: create_purchase_order({"vendor": "NVIDIA", "amount_usd": 145000.0})</div>
+            <div class="p-3 bg-amber-100/80 rounded-lg border border-amber-300 text-amber-950">
+              <strong class="font-bold flex items-center gap-1.5 text-amber-900">
+                <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                HUMAN-IN-THE-LOOP SECURITY INTERCEPTION:
+              </strong>
+              <p class="text-xs text-amber-900 mt-1">
+                Operation halted by enterprise policy. Capital write action exceeds the $50,000 threshold.
+              </p>
+              <div class="mt-2 text-[11px] text-slate-700">
+                Action ID: <code class="font-bold text-slate-900">HITL-ACT-8849F2</code> | HMAC Token: <code class="text-blue-700">0d4f9e17b84a92c8...</code>
+              </div>
             </div>
-            <div class="pt-2 flex gap-2">
-              <button onclick="approveHITL(true)" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-black font-bold rounded text-xs transition">Authorize Transaction (Cryptographic Sign)</button>
-              <button onclick="approveHITL(false)" class="px-3 py-1.5 bg-rose-900 hover:bg-rose-800 text-white font-medium rounded text-xs transition">Reject Transaction</button>
+            <div class="pt-1 flex gap-2.5">
+              <button onclick="approveHITL(true)" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg text-xs shadow-sm transition active:scale-95">
+                Authorize Purchase Order (HMAC Sign)
+              </button>
+              <button onclick="approveHITL(false)" class="px-4 py-2 bg-rose-100 hover:bg-rose-200 text-rose-800 font-semibold rounded-lg text-xs border border-rose-200 transition active:scale-95">
+                Reject Transaction
+              </button>
             </div>
           </div>
         `;
       } else if (type === 'lead') {
-        pill.className = 'px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800';
+        pill.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
         pill.innerText = 'COMPLETED';
         container.innerHTML = `
-          <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-800 space-y-1">
-            <div class="text-cyan-400 font-bold">[STEP 1] THOUGHT:</div>
-            <div class="text-slate-300">Retrieve current CRM lead account details for LEAD-2026-101.</div>
-            <div class="text-blue-400 mt-2 font-bold">ACTION: get_lead({"lead_id": "LEAD-2026-101"})</div>
-            <div class="text-emerald-400 mt-1">OBSERVATION: {"status": "SUCCESS", "company": "Apex Global Financial", "current_stage": "DISCOVERY", "arr": $350000}</div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+            <div class="text-blue-700 font-bold">[STEP 1] THOUGHT:</div>
+            <div class="text-slate-700">Retrieve current CRM lead account details for LEAD-2026-101.</div>
+            <div class="text-slate-900 font-semibold mt-2">ACTION: get_lead({"lead_id": "LEAD-2026-101"})</div>
+            <div class="text-emerald-700 font-medium mt-1">OBSERVATION: {"status": "SUCCESS", "company": "Apex Global Financial", "current_stage": "DISCOVERY", "arr": 350000}</div>
           </div>
-          <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-800 space-y-1">
-            <div class="text-cyan-400 font-bold">[STEP 2] THOUGHT:</div>
-            <div class="text-slate-300">Discovery criteria satisfied. Advance pipeline stage to QUALIFIED.</div>
-            <div class="text-blue-400 mt-2 font-bold">ACTION: update_lead_status({"lead_id": "LEAD-2026-101", "new_stage": "QUALIFIED"})</div>
-            <div class="text-emerald-400 mt-1">OBSERVATION: {"status": "SUCCESS", "updated_record": {"lead_id": "LEAD-2026-101", "stage": "QUALIFIED"}}</div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+            <div class="text-blue-700 font-bold">[STEP 2] THOUGHT:</div>
+            <div class="text-slate-700">Discovery qualification verified. Transition CRM stage to QUALIFIED.</div>
+            <div class="text-slate-900 font-semibold mt-2">ACTION: update_lead_status({"lead_id": "LEAD-2026-101", "new_stage": "QUALIFIED"})</div>
+            <div class="text-emerald-700 font-medium mt-1">OBSERVATION: {"status": "SUCCESS", "updated_record": {"lead_id": "LEAD-2026-101", "stage": "QUALIFIED"}}</div>
           </div>
-          <div class="p-3 bg-emerald-950/30 rounded-lg border border-emerald-800/60 text-emerald-300">
-            ✓ Final Outcome: CRM Lead LEAD-2026-101 advanced to QUALIFIED. Audit entry #142 logged.
+          <div class="p-3.5 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-900 text-xs font-medium">
+            ✓ Final Outcome: CRM Lead LEAD-2026-101 advanced to QUALIFIED stage. Audit ledger entry logged.
           </div>
         `;
       } else if (type === 'ticket') {
-        pill.className = 'px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800';
+        pill.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
         pill.innerText = 'COMPLETED';
         container.innerHTML = `
-          <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-800 space-y-1">
-            <div class="text-cyan-400 font-bold">[STEP 1] THOUGHT:</div>
-            <div class="text-slate-300">Customer reported technical incident. Open priority HIGH ITSM ticket for account ACC-5001.</div>
-            <div class="text-blue-400 mt-2 font-bold">ACTION: create_support_ticket({"account_id": "ACC-5001", "subject": "API latency spike", "priority": "HIGH"})</div>
-            <div class="text-emerald-400 mt-1">OBSERVATION: {"status": "SUCCESS", "ticket_id": "TCK-8804", "queue": "Tier-2 SecOps"}</div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+            <div class="text-blue-700 font-bold">[STEP 1] THOUGHT:</div>
+            <div class="text-slate-700">Client reported technical incident. Open priority HIGH ITSM ticket for account ACC-5001.</div>
+            <div class="text-slate-900 font-semibold mt-2">ACTION: create_support_ticket({"account_id": "ACC-5001", "subject": "API latency spike", "priority": "HIGH"})</div>
+            <div class="text-emerald-700 font-medium mt-1">OBSERVATION: {"status": "SUCCESS", "ticket_id": "TCK-8804", "queue": "Tier-2 SecOps"}</div>
           </div>
-          <div class="p-3 bg-emerald-950/30 rounded-lg border border-emerald-800/60 text-emerald-300">
-            ✓ Final Outcome: Ticket TCK-8804 opened in ServiceNow with HIGH severity SLA.
+          <div class="p-3.5 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-900 text-xs font-medium">
+            ✓ Final Outcome: ServiceNow Incident TCK-8804 created with High Severity SLA routing.
           </div>
         `;
       }
@@ -633,21 +787,27 @@ datheon_agent_hitl_pending_actions 0.0
       const pill = document.getElementById('agent-status-pill');
 
       if (approved) {
-        pill.className = 'px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800';
-        pill.innerText = 'COMPLETED';
-        step2.className = 'p-3 bg-emerald-950/30 rounded-lg border border-emerald-800/60 space-y-2';
+        pill.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
+        pill.innerText = 'AUTHORIZED';
+        step2.className = 'p-4 bg-emerald-50 rounded-xl border border-emerald-200 space-y-2';
         step2.innerHTML = `
-          <div class="text-emerald-400 font-bold">✓ HITL TRANSACTION AUTHORIZED & EXECUTED:</div>
-          <div class="text-slate-300">HMAC cryptographic token validated. Purchase Order <code>PO-88235</code> ($145,000.00 USD) approved for vendor <strong>NVIDIA Cloud Compute</strong>.</div>
-          <div class="text-[11px] mono text-slate-400">Approved by: Sarah Jenkins (Finance Director) | Timestamp: 2026-10-28T19:40:00Z</div>
+          <div class="text-emerald-800 font-bold flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            HITL TRANSACTION AUTHORIZED & EXECUTED:
+          </div>
+          <div class="text-slate-700">HMAC cryptographic signature verified. Capital Purchase Order <code>PO-88235</code> ($145,000.00 USD) executed with vendor <strong>NVIDIA Cloud Compute</strong>.</div>
+          <div class="text-[11px] mono text-slate-500">Signer: Sarah Jenkins (Finance Director) · Verified Timestamp: 2026-10-28T19:40:00Z</div>
         `;
       } else {
-        pill.className = 'px-2 py-0.5 rounded text-[10px] bg-rose-950 text-rose-400 border border-rose-800';
+        pill.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200';
         pill.innerText = 'REJECTED';
-        step2.className = 'p-3 bg-rose-950/30 rounded-lg border border-rose-800/60 space-y-2';
+        step2.className = 'p-4 bg-rose-50 rounded-xl border border-rose-200 space-y-2';
         step2.innerHTML = `
-          <div class="text-rose-400 font-bold">✗ TRANSACTION REJECTED BY HUMAN OPERATOR:</div>
-          <div class="text-slate-300">Action <code>HITL-ACT-8849F2</code> cancelled. No funds disbursed. Cancellation audit record written to ERP journal.</div>
+          <div class="text-rose-800 font-bold flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            TRANSACTION REJECTED BY HUMAN OPERATOR:
+          </div>
+          <div class="text-slate-700">Action <code>HITL-ACT-8849F2</code> cancelled. Zero funds disbursed. Rejection event logged to immutable ERP audit journal.</div>
         `;
       }
     }
