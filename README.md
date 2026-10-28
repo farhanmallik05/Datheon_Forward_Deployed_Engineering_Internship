@@ -4,8 +4,19 @@
 [![Python Version](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg?logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Docker](https://img.shields.io/badge/Docker-Hardened%20VPC-2496ED.svg?logo=docker)](https://www.docker.com/)
-[![Prometheus](https://img.shields.io/badge/Prometheus-Telemetry-E6522C.svg?logo=prometheus)](https://prometheus.io/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Netlify%20Showcase-00AD9F.svg?logo=netlify)](https://datheon-fde-platform.netlify.app)
 [![Directorate Tests](https://img.shields.io/badge/3--Pass%20Audit-100%25%20Passing%20(21%2F21)-success.svg)](scripts/verify_all.py)
+
+---
+
+## 🌐 Live Interactive Web Showcase
+
+A live interactive showcase application is deployed for Directorate evaluators to test all 4 tasks directly in the browser:
+👉 **[https://datheon-fde-platform.netlify.app](https://datheon-fde-platform.netlify.app)**
+
+- **Live RBAC RAG Playground**: Switch employee personas (Engineering L2, Finance L3, HR L3, Intern L1) and verify real-time citations and security boundary rejections.
+- **Autonomous Agent Console**: View Thought &rarr; Action &rarr; Observation cycles and test the Human-in-the-Loop (HITL) cryptographic approval gate.
+- **VPC Telemetry & Benchmarks**: Real-time throughput metrics (47.05 chunks/sec) and latency percentiles.
 
 ---
 

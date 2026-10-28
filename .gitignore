@@ -40,3 +40,10 @@ prometheus_data/
 .DS_Store
 Thumbs.db
 
+# Netlify & Vercel deployment artifacts
+.netlify/
+web/.netlify/
+.vercel/
+web/.vercel/
+
+
