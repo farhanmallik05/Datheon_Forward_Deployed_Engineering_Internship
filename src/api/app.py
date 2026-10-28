@@ -10,7 +10,7 @@ from fastapi import FastAPI, Request, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from src.core.config import get_settings
+from src.core.config import ClearanceTier, get_settings
 from src.core.exceptions import (
     EnterprisePlatformError,
     HallucinationGuardrailError,
@@ -20,6 +20,7 @@ from src.core.exceptions import (
 )
 from src.core.logger import get_logger
 from src.core.telemetry import TelemetryMetrics
+from src.api.rate_limiter import EnterpriseRateLimiter
 from src.api.routes_agent import router as agent_router
 from src.api.routes_erp import router as erp_router
 from src.api.routes_etl import router as etl_router
@@ -73,31 +74,76 @@ app.add_middleware(
 )
 
 
+rate_limiter = EnterpriseRateLimiter.get_instance()
+
+
 @app.middleware("http")
 async def telemetry_and_logging_middleware(request: Request, call_next):
-    """Measures request latency, records Prometheus metrics, and injects W3C correlation IDs."""
+    """Measures request latency, records Prometheus metrics, injects W3C correlation IDs,
+    and enforces Token Bucket rate limits according to api_rate_limiting_spec.md.
+    """
     start_time = time.perf_counter()
     correlation_id = request.headers.get("X-Correlation-ID") or f"corr-{uuid.uuid4().hex[:12]}"
+    path = request.url.path
+    is_exempt = path in ["/healthz", "/readyz", "/metrics", "/docs", "/redoc", "/openapi.json"]
+
+    limit = 750
+    remaining = 750
+
+    if not is_exempt and path.startswith("/api/"):
+        client_key = request.headers.get("X-Employee-ID") or (request.client.host if request.client else "unknown_client")
+        raw_clearance = request.headers.get("X-Clearance-Tier", "L1_PUBLIC")
+        try:
+            clearance = ClearanceTier(raw_clearance)
+        except ValueError:
+            clearance = ClearanceTier.L1_PUBLIC
+
+        allowed, limit, remaining, retry_after = rate_limiter.check_rate_limit(client_key, clearance)
+        if not allowed:
+            duration_sec = time.perf_counter() - start_time
+            TelemetryMetrics.record_http_request(
+                method=request.method,
+                endpoint=path,
+                status_code=429,
+                duration_sec=duration_sec,
+            )
+            return JSONResponse(
+                status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+                content={
+                    "error": "RATE_LIMIT_EXCEEDED",
+                    "message": f"Rate limit quota exhausted for clearance tier {clearance.value}.",
+                    "retry_after_seconds": retry_after,
+                },
+                headers={
+                    "X-RateLimit-Limit": str(limit),
+                    "X-RateLimit-Remaining": str(remaining),
+                    "Retry-After": str(retry_after),
+                    "X-Correlation-ID": correlation_id,
+                },
+            )
+
     response: Response = None
 
     try:
         response = await call_next(request)
         duration_sec = time.perf_counter() - start_time
-        endpoint = request.url.path
         TelemetryMetrics.record_http_request(
             method=request.method,
-            endpoint=endpoint,
+            endpoint=path,
             status_code=response.status_code,
             duration_sec=duration_sec,
         )
         response.headers["X-Correlation-ID"] = correlation_id
         response.headers["X-Response-Time-Ms"] = f"{(duration_sec * 1000.0):.2f}"
+        if not is_exempt:
+            response.headers["X-RateLimit-Limit"] = str(limit)
+            response.headers["X-RateLimit-Remaining"] = str(remaining)
         return response
     except Exception as e:
         duration_sec = time.perf_counter() - start_time
         TelemetryMetrics.record_http_request(
             method=request.method,
-            endpoint=request.url.path,
+            endpoint=path,
             status_code=500,
             duration_sec=duration_sec,
         )

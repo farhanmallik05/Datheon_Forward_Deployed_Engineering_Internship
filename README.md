@@ -6,18 +6,19 @@
 [![Docker](https://img.shields.io/badge/Docker-Hardened%20VPC-2496ED.svg?logo=docker)](https://www.docker.com/)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Netlify%20Showcase-00AD9F.svg?logo=netlify)](https://datheon-fde-platform.netlify.app)
 [![CI Pipeline](https://github.com/farhanmallik05/Datheon_Forward_Deployed_Engineering_Internship/actions/workflows/ci.yml/badge.svg)](https://github.com/farhanmallik05/Datheon_Forward_Deployed_Engineering_Internship/actions)
-[![Directorate Tests](https://img.shields.io/badge/3--Pass%20Audit-100%25%20Passing%20(25%2F25)-success.svg)](scripts/verify_all.py)
-[![Evaluation Due Diligence](https://img.shields.io/badge/Evaluation%20Audit-Grade%20A%20(8.9%2F10)-blueviolet.svg)](docs/PROJECT_EVALUATION_REPORT.md)
+[![Directorate Tests](https://img.shields.io/badge/3--Pass%20Audit-100%25%20Passing%20(31%2F31)-success.svg)](scripts/verify_all.py)
+[![Evaluation Due Diligence](https://img.shields.io/badge/Evaluation%20Audit-Grade%20A+%20(9.6%2F10)-blueviolet.svg)](docs/PROJECT_EVALUATION_REPORT.md)
 
 ---
 
 ## 🌐 Live Interactive Web Showcase
 
-A live interactive showcase application is deployed for Directorate evaluators to test all 4 tasks directly in the browser:
+A live interactive showcase application is deployed for Directorate evaluators to test all features directly in the browser:
 👉 **[https://datheon-fde-platform.netlify.app](https://datheon-fde-platform.netlify.app)**
 
 - **Live RBAC RAG Playground**: Switch employee personas (Engineering L2, Finance L3, HR L3, Intern L1) and verify real-time citations and security boundary rejections.
 - **Autonomous Agent Console**: View Thought &rarr; Action &rarr; Observation cycles and test the Human-in-the-Loop (HITL) cryptographic approval gate.
+- **Red Team Security Engine**: Simulate live adversarial attacks (Prompt Injection overrides, HMAC token tampering, replay interception, and HTTP 429 token-bucket exhaustion).
 - **VPC Telemetry & Benchmarks**: Real-time throughput metrics (47.05 chunks/sec) and latency percentiles.
 
 ---

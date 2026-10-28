@@ -19,7 +19,15 @@ def run_pass_1():
     print("\n" + "=" * 75)
     print("  PASS 1: ARCHITECTURAL INTEGRITY & COMPONENT UNIT TEST AUDIT")
     print("=" * 75)
-    cmd = [sys.executable, "-m", "pytest", "tests/test_task1_etl.py", "tests/test_task3_agent_hitl.py", "-v"]
+    cmd = [
+        sys.executable,
+        "-m",
+        "pytest",
+        "tests/test_task1_etl.py",
+        "tests/test_task3_agent_hitl.py",
+        "tests/test_client_sdk.py",
+        "-v",
+    ]
     res = subprocess.run(cmd, cwd=BASE_DIR, capture_output=True, text=True)
     print(res.stdout)
     if res.returncode != 0:
@@ -55,8 +63,15 @@ def run_pass_3():
     print("\n" + "=" * 75)
     print("  PASS 3: END-TO-END FASTAPI SERVICE, PROMETHEUS TELEMETRY & LATENCY")
     print("=" * 75)
-    # Run API service tests
-    cmd_test = [sys.executable, "-m", "pytest", "tests/test_task4_api_service.py", "-v"]
+    # Run API service and rate limiter tests
+    cmd_test = [
+        sys.executable,
+        "-m",
+        "pytest",
+        "tests/test_task4_api_service.py",
+        "tests/test_rate_limiter.py",
+        "-v",
+    ]
     res_test = subprocess.run(cmd_test, cwd=BASE_DIR, capture_output=True, text=True)
     print(res_test.stdout)
     if res_test.returncode != 0:

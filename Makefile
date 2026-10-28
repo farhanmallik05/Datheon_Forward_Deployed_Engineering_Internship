@@ -1,10 +1,11 @@
-.PHONY: help install test verify benchmark-etl benchmark-latency cli docker-build docker-up docker-down clean
+.PHONY: help install test lint verify benchmark-etl benchmark-latency cli docker-build docker-up docker-down clean
 
 help:
 	@echo "Datheon Forward Deployed Engineering (FDE) Platform"
 	@echo "====================================================="
 	@echo "make install           - Install project dependencies"
-	@echo "make test              - Run all 25 unit, integration, and security tests"
+	@echo "make test              - Run all 31 unit, integration, and security tests"
+	@echo "make lint              - Run ruff code quality checks"
 	@echo "make verify            - Run comprehensive 3-pass audit suite"
 	@echo "make benchmark-etl     - Run batch vector ingestion throughput benchmark"
 	@echo "make benchmark-latency - Run microservice latency benchmark"
@@ -19,6 +20,9 @@ install:
 
 test:
 	pytest tests/ -v
+
+lint:
+	ruff check src/ tests/
 
 verify:
 	python scripts/verify_all.py
@@ -45,3 +49,4 @@ clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	find . -type d -name ".pytest_cache" -exec rm -rf {} +
 	rm -rf *.log
+
