@@ -31,8 +31,9 @@ Containerized the platform into a hardened Docker microservice with non-root sec
 
 ✅ Verified with a **3-Pass automated test suite** (21/21 passing tests covering unit logic, negative security boundary audits, and end-to-end latency benchmarks).
 
-📂 **Public GitHub Repository**: https://github.com/your-username/Datheon_Forward_Deployed_Engineering_Internship
-🎥 **Live Video Walkthrough**: [Link to your Loom / YouTube demo]
+📂 **Public GitHub Repository**: https://github.com/farhanmallik05/Datheon_Forward_Deployed_Engineering_Internship
+🌐 **Live Interactive Showcase**: https://datheon-fde-platform.netlify.app
+🎥 **Live Video Walkthrough**: [Link to your Loom / YouTube demo (Optional)]
 
 Huge thanks to the **@Datheon** Directorate team for designing a curriculum that reflects real-world Forward Deployed Engineering at tier-one enterprise tech companies!
 
