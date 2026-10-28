@@ -112,3 +112,4 @@ class SemanticChunker:
             )
 
         return chunks
+

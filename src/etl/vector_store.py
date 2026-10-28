@@ -328,3 +328,4 @@ class VectorStoreFactory:
             cls._instance = InMemoryCosineVectorStore(settings.VECTOR_DIMENSION)
 
         return cls._instance
+

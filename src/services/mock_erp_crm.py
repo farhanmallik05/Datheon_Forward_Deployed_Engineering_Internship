@@ -224,3 +224,4 @@ class MockEnterpriseService:
             self._write_data(data)
             self._log_audit("APPROVE_PO", "purchase_orders", po_number, user_id, {"token": token})
             return copy.deepcopy(target)
+

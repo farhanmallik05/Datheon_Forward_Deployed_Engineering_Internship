@@ -83,3 +83,4 @@ def user_pub_l1():
         department=Department.CROSS_FUNCTIONAL,
         clearance=ClearanceTier.L1_PUBLIC,
     )
+

@@ -233,3 +233,4 @@ class AutonomousEnterpriseAgent:
         for s in steps:
             summaries.append(f"Step {s.step_number} [{s.action}]: {s.observation[:160]}")
         return f"Objective achieved: '{objective}'. Operations executed:\n" + "\n".join(summaries)
+

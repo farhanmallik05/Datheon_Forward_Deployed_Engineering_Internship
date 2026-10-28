@@ -101,3 +101,4 @@ def test_mock_erp_rest_endpoints(api_client):
     res_audit = api_client.get("/api/v1/erp/audit-log")
     assert res_audit.status_code == 200
     assert "audit_log" in res_audit.json()
+

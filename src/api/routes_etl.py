@@ -58,3 +58,4 @@ def get_vector_store_statistics(
         "backend": type(store).__name__,
         "caller_clearance": current_user.clearance.value,
     }
+

@@ -156,3 +156,4 @@ class VectorETLPipeline:
         candidate_files = [p for p in dir_path.glob(pattern) if p.is_file() and p.suffix.lower() in supported_exts]
 
         return self.ingest_files(candidate_files, batch_size=batch_size)
+

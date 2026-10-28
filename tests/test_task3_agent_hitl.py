@@ -87,3 +87,4 @@ def test_hitl_sensitive_write_interception_and_approval(mock_erp, user_eng_l2, u
     assert approval_res["status"] == "EXECUTED"
     assert "purchase_order" in approval_res["result"]
     assert approval_res["result"]["purchase_order"]["amount_usd"] == 145000.0
+

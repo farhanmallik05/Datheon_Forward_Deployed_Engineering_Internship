@@ -124,3 +124,4 @@ async def get_authenticated_user(
         clearance=clearance,
         is_admin=is_admin,
     )
+

@@ -232,3 +232,4 @@ class EnterpriseToolRegistry:
             parameters={"query": {"type": "string"}},
             execute=_rag_knowledge_search,
         )
+

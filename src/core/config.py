@@ -111,3 +111,4 @@ class Settings(BaseSettings):
 def get_settings() -> Settings:
     """Singleton getter for application configuration."""
     return Settings()
+

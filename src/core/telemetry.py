@@ -132,3 +132,4 @@ class TelemetryMetrics:
     @staticmethod
     def get_content_type() -> str:
         return CONTENT_TYPE_LATEST
+

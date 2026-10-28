@@ -162,3 +162,4 @@ Prometheus automatically scrapes the microservice every 5 seconds.
 - **Elevated Guardrail Rejections**: `rate(datheon_rag_guardrail_blocked_total[5m]) > 0.05`
 - **Unresolved HITL Queue Stagnation**: `datheon_agent_hitl_pending_actions > 10`
 - **High Ingestion Error Rate**: `rate(datheon_etl_documents_total{status="failure"}[5m]) > 0`
+

@@ -73,3 +73,4 @@ The negative test matrix (`tests/test_security_leakage.py`) executed cross-tenan
 2. **Department Isolation Audit**: An `ENGINEERING` engineer with `L3` clearance querying for `HR` executive payroll was restricted strictly to the engineering domain.
 3. **HITL Tampering Audit**: Submitting a forged or modified HMAC token for sensitive purchase orders resulted in an immediate `400 Bad Request` rejection with cryptographic error alert.
 4. **Unauthorized Approval Audit**: An `L1` user attempting to approve an executive purchase order was blocked with `403 Forbidden` (`RBACAccessDeniedError`).
+

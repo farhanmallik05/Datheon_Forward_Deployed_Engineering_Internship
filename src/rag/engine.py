@@ -171,3 +171,4 @@ class EnterpriseRAGEngine:
             return "No verifiable factual claims could be synthesized from authorized evidence."
 
         return " ".join(answer_parts[:3])
+

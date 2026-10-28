@@ -99,3 +99,4 @@ def test_end_to_end_rag_engine(vector_store, embedder, user_fin_l3):
     assert "Page" in resp.citations[0]["citation_tag"]
     assert resp.is_grounded is True
     assert resp.latency_ms > 0
+

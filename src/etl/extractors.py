@@ -326,3 +326,4 @@ class ExtractorFactory:
         if not extractor_cls:
             raise DocumentExtractionError(f"Unsupported document format '{ext}' for file: {file_path}")
         return extractor_cls()
+

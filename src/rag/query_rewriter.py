@@ -87,3 +87,4 @@ class EnterpriseQueryRewriter:
             inferred_department=inferred_dept,
             extracted_entities=entities,
         )
+

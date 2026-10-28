@@ -15,3 +15,4 @@ scrape_configs:
           environment: "client_vpc_production"
           service: "enterprise_ai_gateway"
           cluster: "vpc_private_subnet_az_a"
+

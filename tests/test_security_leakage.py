@@ -87,3 +87,4 @@ def test_hitl_approver_insufficient_clearance():
             approver=user_l1,  # Insufficient clearance
             approved=True,
         )
+

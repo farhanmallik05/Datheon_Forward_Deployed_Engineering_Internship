@@ -27,3 +27,4 @@ def get_logger(name: str, level: Optional[str] = None) -> logging.Logger:
         logger.setLevel(logging.INFO)
 
     return logger
+

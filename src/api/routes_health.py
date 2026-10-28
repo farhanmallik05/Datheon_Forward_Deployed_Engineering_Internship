@@ -57,3 +57,4 @@ def readiness_check():
 @router.get("/livez", status_code=status.HTTP_200_OK)
 def live_check():
     return {"status": "alive"}
+

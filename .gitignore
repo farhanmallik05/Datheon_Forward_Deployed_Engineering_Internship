@@ -39,3 +39,4 @@ qdrant_storage/
 prometheus_data/
 .DS_Store
 Thumbs.db
+

@@ -76,3 +76,4 @@ class AgentExecutionTrace:
             "pending_hitl": self.pending_hitl.model_dump() if self.pending_hitl else None,
             "execution_trace": [s.model_dump() for s in self.steps],
         }
+

@@ -41,3 +41,4 @@ class HITLApprovalRequiredError(EnterprisePlatformError):
 class InvalidConfirmationTokenError(EnterprisePlatformError):
     """Raised when an invalid or forged HITL confirmation token is submitted."""
     pass
+

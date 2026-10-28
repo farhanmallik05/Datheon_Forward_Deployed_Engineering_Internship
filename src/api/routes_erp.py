@@ -62,3 +62,4 @@ def get_audit_trail(erp: MockEnterpriseService = Depends(get_erp_service)):
         "total_entries": len(data.get("audit_log", [])),
         "audit_log": data.get("audit_log", []),
     }
+

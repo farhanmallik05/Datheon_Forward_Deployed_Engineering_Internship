@@ -84,3 +84,4 @@ class CrossEncoderReranker:
 
         candidates.sort(key=lambda x: x.rerank_score, reverse=True)
         return candidates[:limit]
+

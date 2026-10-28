@@ -125,3 +125,4 @@ class EnterpriseEmbedder:
             vectors.append(vec)
 
         return np.array(vectors, dtype=np.float32)
+

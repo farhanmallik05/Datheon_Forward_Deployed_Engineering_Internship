@@ -124,3 +124,4 @@ class RBACRetriever:
             user.clearance.value,
         )
         return verified_chunks
+
