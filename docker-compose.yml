@@ -1,0 +1,87 @@
+version: "3.9"
+
+services:
+  # Datheon Enterprise FDE Microservice
+  datheon-fde-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: datheon/fde-microservice:1.0.0
+    container_name: datheon-fde-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=production
+      - LOG_LEVEL=INFO
+      - VECTOR_STORE_BACKEND=qdrant
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+      - SECRET_KEY=datheon_vpc_hardened_secret_key_884920261028
+      - ADMIN_API_KEY=fde_admin_secops_token_9934
+      - HITL_HMAC_SECRET=datheon_hitl_cryptographic_audit_secret_2026
+    depends_on:
+      qdrant:
+        condition: service_healthy
+    networks:
+      - datheon-vpc-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 4096M
+        reservations:
+          cpus: "0.5"
+          memory: 1024M
+
+  # High-Performance Vector Database (Qdrant)
+  qdrant:
+    image: qdrant/qdrant:v1.12.0
+    container_name: datheon-qdrant-cluster
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    networks:
+      - datheon-vpc-net
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/6333 && echo -e \"GET /healthz HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n\" >&3 && cat <&3 | grep \"200 OK\"' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  # Prometheus Real-Time Telemetry Scraper
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    container_name: datheon-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    networks:
+      - datheon-vpc-net
+    depends_on:
+      - datheon-fde-api
+
+networks:
+  datheon-vpc-net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.180.20.0/24
+
+volumes:
+  qdrant_storage:
+  prometheus_data:

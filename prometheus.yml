@@ -1,0 +1,17 @@
+# -----------------------------------------------------------------------------
+# Prometheus VPC Telemetry Scrape Configuration
+# Scrapes Datheon FDE Microservice metrics every 5 seconds
+# -----------------------------------------------------------------------------
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: "datheon_fde_microservice"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["datheon-fde-api:8000"]
+        labels:
+          environment: "client_vpc_production"
+          service: "enterprise_ai_gateway"
+          cluster: "vpc_private_subnet_az_a"
