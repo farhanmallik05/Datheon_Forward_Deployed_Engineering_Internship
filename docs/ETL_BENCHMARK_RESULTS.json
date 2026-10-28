@@ -1,0 +1,61 @@
+{
+  "benchmark_timestamp": "2026-10-28T18:47:00Z",
+  "pipeline": {
+    "documents_ingested": 6,
+    "chunks_created": 21,
+    "total_tokens": 1185,
+    "ingestion_duration_sec": 0.4488,
+    "chunks_per_sec": 47.05,
+    "docs_per_sec": 13.44
+  },
+  "department_distribution": {
+    "engineering": 11,
+    "finance": 5,
+    "hr": 3,
+    "legal": 2
+  },
+  "clearance_distribution": {
+    "L1_PUBLIC": 4,
+    "L2_RESTRICTED": 10,
+    "L3_CONFIDENTIAL": 7
+  },
+  "retrieval_latencies": [
+    {
+      "query": "What was Datheon Q3 consolidated revenue and cloud infrastructure expenditure?",
+      "department": "finance",
+      "clearance": "L3_CONFIDENTIAL",
+      "latency_ms": 12.108,
+      "top_k_returned": 3,
+      "ground_truth_matched": true,
+      "top_score": 0.6363
+    },
+    {
+      "query": "What is the token bucket rate limit for Tier L1 and Tier L2 users?",
+      "department": "engineering",
+      "clearance": "L1_PUBLIC",
+      "latency_ms": 8.4,
+      "top_k_returned": 3,
+      "ground_truth_matched": true,
+      "top_score": 0.7128
+    },
+    {
+      "query": "What is the executive bonus multiplier for Band E1 and Band E2?",
+      "department": "hr",
+      "clearance": "L3_CONFIDENTIAL",
+      "latency_ms": 6.404,
+      "top_k_returned": 3,
+      "ground_truth_matched": true,
+      "top_score": 0.5537
+    },
+    {
+      "query": "What is the duration of trade secret confidentiality under the mutual NDA?",
+      "department": "legal",
+      "clearance": "L2_RESTRICTED",
+      "latency_ms": 5.89,
+      "top_k_returned": 2,
+      "ground_truth_matched": true,
+      "top_score": 0.6023
+    }
+  ],
+  "security_isolation_verified": true
+}

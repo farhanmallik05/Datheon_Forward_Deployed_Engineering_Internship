@@ -1,0 +1,90 @@
+{
+  "benchmark_timestamp": "2026-10-28T18:57:00Z",
+  "vpc_environment": "Dockerized Linux Subnet / Local VPC Testbed",
+  "benchmarks": [
+    {
+      "endpoint": "/healthz",
+      "method": "GET",
+      "iterations": 50,
+      "success_rate_percent": 100.0,
+      "mean_ms": 1.45,
+      "p50_ms": 1.39,
+      "p90_ms": 1.98,
+      "p95_ms": 2.16,
+      "p99_ms": 2.93,
+      "min_ms": 0.87,
+      "max_ms": 2.93,
+      "scenario_name": "Health Liveness Probe"
+    },
+    {
+      "endpoint": "/readyz",
+      "method": "GET",
+      "iterations": 30,
+      "success_rate_percent": 100.0,
+      "mean_ms": 1.63,
+      "p50_ms": 1.51,
+      "p90_ms": 2.28,
+      "p95_ms": 2.58,
+      "p99_ms": 2.91,
+      "min_ms": 1.15,
+      "max_ms": 2.91,
+      "scenario_name": "VPC Readiness Probe"
+    },
+    {
+      "endpoint": "/api/v1/erp/inventory/SKU-H100-80G",
+      "method": "GET",
+      "iterations": 40,
+      "success_rate_percent": 100.0,
+      "mean_ms": 1.8,
+      "p50_ms": 1.65,
+      "p90_ms": 2.5,
+      "p95_ms": 2.71,
+      "p99_ms": 2.75,
+      "min_ms": 1.24,
+      "max_ms": 2.75,
+      "scenario_name": "Mock ERP Inventory Query"
+    },
+    {
+      "endpoint": "/api/v1/rag/query",
+      "method": "POST",
+      "iterations": 15,
+      "success_rate_percent": 100.0,
+      "mean_ms": 390.84,
+      "p50_ms": 83.06,
+      "p90_ms": 95.62,
+      "p95_ms": 4730.86,
+      "p99_ms": 4730.86,
+      "min_ms": 64.04,
+      "max_ms": 4730.86,
+      "scenario_name": "Enterprise RBAC RAG Query"
+    },
+    {
+      "endpoint": "/api/v1/agent/chat",
+      "method": "POST",
+      "iterations": 10,
+      "success_rate_percent": 100.0,
+      "mean_ms": 6.75,
+      "p50_ms": 5.24,
+      "p90_ms": 17.85,
+      "p95_ms": 17.85,
+      "p99_ms": 17.85,
+      "min_ms": 3.78,
+      "max_ms": 17.85,
+      "scenario_name": "Autonomous Agent Tool Orchestration"
+    },
+    {
+      "endpoint": "/metrics",
+      "method": "GET",
+      "iterations": 25,
+      "success_rate_percent": 100.0,
+      "mean_ms": 4.45,
+      "p50_ms": 4.49,
+      "p90_ms": 4.84,
+      "p95_ms": 5.06,
+      "p99_ms": 5.94,
+      "min_ms": 3.77,
+      "max_ms": 5.94,
+      "scenario_name": "Prometheus Telemetry Scrape"
+    }
+  ]
+}
